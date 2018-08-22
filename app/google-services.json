@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "150636937104",
+    "firebase_url": "https://dumpit-193c2.firebaseio.com",
+    "project_id": "dumpit-193c2",
+    "storage_bucket": "dumpit-193c2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:150636937104:android:f99331daa3d4173c",
+        "android_client_info": {
+          "package_name": "com.a000webhostapp.trackingdaily.dumpit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "150636937104-n4odld756fg9l3f2ksr365vfg4bm4aaf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsRAiUBmjUY1WfdsNhgZbYgSht4fa3AUo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
