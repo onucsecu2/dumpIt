@@ -58,6 +58,7 @@ public class CameraActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String pathFile;
     private Uri uri;
+    private Uri downloadUrl;
     String date;
     private StorageReference storageReference;
     @Override
@@ -82,6 +83,8 @@ public class CameraActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             CheckFilePermissions();
         }
+
+
         DateFormat df = new SimpleDateFormat("ddMMyyyyHHmmss");
         date = df.format(Calendar.getInstance().getTime());
 
@@ -93,19 +96,24 @@ public class CameraActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.VISIBLE);
                 FirebaseUser user = mAuth.getCurrentUser();
                 String userID = user.getUid();
-                StorageReference mStorageReference=storageReference.child(userID).child(str);
-
-                DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Locations");
-                Locations location = new Locations(userID,str,val,longitude,latitude,date);
                 String locID = UUID.randomUUID().toString();
-                myRef.child(userID).child(locID).setValue(location);
+                StorageReference mStorageReference=storageReference.child(userID).child(locID);
+
+                DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Complaints");
+                Complaint complaint = new Complaint(userID,str,val,longitude,latitude,date,"Pending",locID,null);
+
+                /*it will create a random unique string por each compliants.it will be considered as Complaints id*/
+
+
+
+                myRef.child(userID).child(locID).setValue(complaint);
                 toastMessage("successful");
 
 
                 mStorageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Uri downloadUrl = taskSnapshot.getUploadSessionUri();
+                        downloadUrl = taskSnapshot.getUploadSessionUri();
                         toastMessage("Upload Success");
                         progressBar.setVisibility(View.GONE);
                     }
