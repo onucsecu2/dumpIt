@@ -13,19 +13,21 @@ public class Locations {
     double latitude;
     double longitude;
     String date;
+    String status;
 
 
     public Locations(){
 
     }
 
-    public Locations(String uid,String type,int val,double longitude,double latitude,String date){
+    public Locations(String uid,String type,int val,double longitude,double latitude,String date,String status){
         this.uid=uid;
         this.type=type;
         this.val=val;
         this.longitude=longitude;
         this.latitude=latitude;
         this.date=date;
+        this.status=status;
     }
 
     public String getUid() {
@@ -50,5 +52,9 @@ public class Locations {
 
     public String getDate() {
         return date;
+    }
+
+    public String getStatus() {
+        return status;
     }
 }
