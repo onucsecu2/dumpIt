@@ -50,6 +50,7 @@ public class GPSHelper extends Service implements LocationListener{
                         }
                     }
                 }
+                    //des des koro modh khao ar desh desh koro shutki khaowa  desh desh koro
                 // if lcoation is not found from GPS than it will found from network //
                 if(location==null){
                     if(isNetworkEnabled){
