@@ -25,7 +25,7 @@
     <string name="descript_error_verification_1">আপনার প্রদত্ত ফোন নম্বরটি ভেরিফিকেশন করা হচ্ছে। কিছুক্ষনের মধ্যে মেসেজের মাধ্যমে একটি ভেরিফিকেশন কোড পাঠানো হবে অপেক্ষা করুন</string>
     <string name="descript_error_verification_2">ভেরিফিকেশন ফেইলড</string>
     <string name="descript_error_verification_3">ভেরিফিকেশন কোডটি লিখুন</string>
-    <string name="descript_error_verification_4">failed</string>
+    <string name="descript_error_verification_4">কোথাও কিছু সমস্যা হচ্ছে</string>
     <string name="error_invalid_email">এ ই-মেইলটি গ্রহণযোগ্য নয়</string>
     <string name="error_invalid_password">পাসওয়ার্ডটি খুবই ছোট</string>
     <string name="error_incorrect_password">পাসওয়ার্ডটি ভুল</string>
@@ -35,6 +35,8 @@
     <string name="sweeper">আমি সেবক</string>
     <string name="admin">আমি নিরীক্ষক</string>
     <string name="or">অথবা</string>
+    <string name="reqLocShare">GPS / লোকেশন শেয়ারিং On করুন</string>
+    <string name="reqNet">Data Connection কিংবা Wifi On করুন এবং ইন্টারনেট সংযোগ নিশ্চিত করুন</string>
 
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
@@ -58,5 +60,5 @@
         <item>ডাস্টবিন/বিন উপচিয়ে পড়ছে</item>
         <item>বিন পরিপুর্ণ</item>
     </string-array>
-    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_maps">ম্যাপ</string>
 </resources>

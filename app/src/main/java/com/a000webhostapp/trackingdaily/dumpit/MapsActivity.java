@@ -88,8 +88,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 if(tog>2){
                     tog=0;
                 }
-
-
                 //startActivity(getIntent());
                 Intent intent = new Intent(MapsActivity.this, MapsActivity.class);
                 intent.putExtra("tog",tog);
@@ -114,10 +112,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         gpsHelper= new GPSHelper(getApplicationContext());
         mLocation = gpsHelper.getLocation();
-
-        latitude = mLocation.getLatitude();
-        longitude = mLocation.getLongitude();
-
+        try {
+            latitude = mLocation.getLatitude();
+            longitude = mLocation.getLongitude();
+        }catch (Exception e){
+            toastMessage(String.valueOf(R.string.reqLocShare));
+            Intent gpsOptionsIntent = new Intent(
+                    android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(gpsOptionsIntent);
+        }
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -177,7 +180,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         /*here all other pins will be shown*/
 
-        myRef = FirebaseDatabase.getInstance().getReference("Locations");
+        myRef = FirebaseDatabase.getInstance().getReference("Complaints");
                 myRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -185,7 +188,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                     for(DataSnapshot userID : dataSnapshot.getChildren()){
                         for(DataSnapshot locShot:userID.getChildren()){
-                            Locations location  = locShot.getValue(Locations.class);
+                            Complaint location  = locShot.getValue(Complaint.class);
 
 
                             int valu=location.getVal();
