@@ -1,19 +1,15 @@
 package com.a000webhostapp.trackingdaily.dumpit;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.hardware.Camera;
 import android.location.Location;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -24,11 +20,12 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polygon;
+import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,11 +33,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-
-import static java.security.AccessController.getContext;
-
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsSweeperActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private  Marker marker=null;
@@ -48,12 +41,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private  GPSHelper gpsHelper;
     private Location mLocation;
     private double longitude, latitude;
-    private Button toggler;
-    private Button next;
-    private int tog;
-    private int val;
     private LatLng mPoint;
-    private String str;
     private FirebaseAuth mAuth;
     private Handler mHandler = new Handler();
     private DatabaseReference myRef;
@@ -61,54 +49,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
-        toggler=(Button)findViewById(R.id.view_toggle);
-        next=(Button)findViewById(R.id.informer_next_2);
-        next.getBackground().setAlpha(80);
-        next.setEnabled(false);
+        setContentView(R.layout.activity_maps_sweeper);
         mAuth=FirebaseAuth.getInstance();
-        Intent recievedIntent= getIntent();
-        tog = recievedIntent.getIntExtra("tog",0);
-        val = recievedIntent.getIntExtra("val",0);
-        str = recievedIntent.getStringExtra("str");
-
-       if(tog==0){
-            toggler.setText("Terrain View");
-        }
-        if(tog==1){
-            toggler.setText("Satellite View");
-        }
-        if(tog==2){
-            toggler.setText("Normal View");
-        }
-        toggler.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tog=tog+1;
-                if(tog>2){
-                    tog=0;
-                }
-                //startActivity(getIntent());
-                Intent intent = new Intent(MapsActivity.this, MapsActivity.class);
-                intent.putExtra("tog",tog);
-                intent.putExtra("val",val);
-                intent.putExtra("str",str);
-                finish();
-                startActivity(intent);
-            }
-        });
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MapsActivity.this, CameraActivity.class);
-                intent.putExtra("val",val);
-                intent.putExtra("str",str);
-                intent.putExtra("longitude",mPoint.longitude);
-                intent.putExtra("latitude",mPoint.latitude);
-                startActivity(intent);
-            }
-        });
-
 
         gpsHelper= new GPSHelper(getApplicationContext());
         mLocation = gpsHelper.getLocation();
@@ -123,7 +65,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+                .findFragmentById(R.id.map_sweeper);
         mapFragment.getMapAsync(this);
     }
 
@@ -141,23 +83,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         final LatLng latLng = new LatLng(latitude, longitude);
-        mMap.addCircle(new CircleOptions()
-                .center(latLng)
-                .radius(75)
-                .strokeWidth(2f));
-                //.fillColor(0x55ffff99));
-        if(tog==0) {
-            mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-
-        }
-        else if(tog==1){
-            mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
-            // Add a marker in Sydney and move the camera
-        }
-        else{
-            mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-        }
 
         /*LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
@@ -180,60 +107,53 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         /*here all other pins will be shown*/
 
-        myRef = FirebaseDatabase.getInstance().getReference("Complaints");
+        myRef = FirebaseDatabase.getInstance().getReference("Area").child("A1");
                 myRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
 
-                    for(DataSnapshot userID : dataSnapshot.getChildren()){
-                        for(DataSnapshot locShot:userID.getChildren()){
-                            Complaint location  = locShot.getValue(Complaint.class);
+                    AreaCode areaCode =dataSnapshot.getValue(AreaCode.class);
+                    double p11,p12,p21,p22,p31,p32,p41,p42,p51,p52;
+                    p11=areaCode.getP11();
+                    p12=areaCode.getP12();
+                    p21=areaCode.getP21();
+                    p22=areaCode.getP22();
+                    p31=areaCode.getP31();
+                    p32=areaCode.getP32();
+                    p41=areaCode.getP41();
+                    p42=areaCode.getP42();
+                    p51=areaCode.getP51();
+                    p52=areaCode.getP52();
+
+                    Polygon polygon = mMap.addPolygon(new PolygonOptions()
+                            .add(new LatLng(p11, p12), new LatLng(p21, p22), new LatLng(p31, p32), new LatLng(p41, p42),new LatLng(p51,p52))
+                            .strokeColor(Color.RED));
 
 
-                            int valu=location.getVal();
-                            double lon=location.getLongitude();
-                            double lat=location.getLatitude();
+                    //.fillColor(Color.BLUE));
 
-                            String snip=location.getType();
-                            snip+="\n"+location.getDate();
-                            LatLng p = new LatLng(lat,lon);
 
-                           int height = 100;
-                            int width = 100;
-                            BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.comp_8);;
-                            if(valu==1) {
-                                bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.com_8);
-                            }
-                            else if(valu==2){
-                                bitmapdraw=(BitmapDrawable)getResources().getDrawable(R.drawable.com_5);
-                            }
-                            else if(valu==3){
-                                bitmapdraw=(BitmapDrawable)getResources().getDrawable(R.drawable.com_9);
-                            }
-                            else if(valu==4){
-                                bitmapdraw=(BitmapDrawable)getResources().getDrawable(R.drawable.com_6);
-                            }
-                            else if(valu==5) {
-                                bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.comp_8);
-                            }
-                            Bitmap b=bitmapdraw.getBitmap();
-                            Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
-                            mMarker = mMap.addMarker(new MarkerOptions()
-                                        .snippet(snip)
-                                        .title(location.getType())
-                                        .rotation((float) 0.0)
-                                        .icon(BitmapDescriptorFactory.fromBitmap(smallMarker))
-                                        .position(p));
+                    /*for(DataSnapshot area : dataSnapshot.getChildren()){
+                        AreaCode areaCode =area.getValue(AreaCode.class);
+                        double p11,p12,p21,p22,p31,p32,p41,p42,p51,p52;
+                        p11=areaCode.getP11();
+                        p12=areaCode.getP12();
+                        p21=areaCode.getP21();
+                        p22=areaCode.getP22();
+                        p31=areaCode.getP31();
+                        p32=areaCode.getP32();
+                        p41=areaCode.getP41();
+                        p42=areaCode.getP42();
+                        p51=areaCode.getP51();
+                        p52=areaCode.getP52();
 
-                           /* String s=snip;
-                            s+=String.valueOf(lat);
-                            s+=String.valueOf(lon);
-                            s+=String.valueOf(valu);
-                            toastMessage(s);*/
+                        Polygon polygon = mMap.addPolygon(new PolygonOptions()
+                                .add(new LatLng(p11, p12), new LatLng(p21, p22), new LatLng(p31, p32), new LatLng(p41, p42),new LatLng(p51,p52))
+                                .strokeColor(Color.RED));
+                                //.fillColor(Color.BLUE));
 
-                    }
-                }
+                    }*/
 
             }
 
@@ -242,65 +162,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     toastMessage(databaseError.getMessage().toString());
             }
         });
-
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-
-            @Override
-            public void onMapClick(LatLng point) {
-                // TODO Auto-generated method stub
-                mPoint=point;
-                float distance[] = new float[2];
-                Location.distanceBetween( point.latitude, point.longitude,
-                        latLng.latitude, latLng.longitude, distance);
-
-                if( distance[0] > 75  ){
-                    Toast.makeText(getBaseContext(), "You are far from the incidence", Toast.LENGTH_SHORT).show();
-                } else {
-
-
-                   // Toast.makeText(getBaseContext(), "Inside", Toast.LENGTH_SHORT).show();
-                    if(marker!=null) {
-                        marker.remove();
-                    }
-
-                    int height = 100;
-                    int width = 100;
-                    BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.comp_8);;
-                    if(val==1) {
-                        bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.com_8);
-                    }
-                    else if(val==2){
-                        bitmapdraw=(BitmapDrawable)getResources().getDrawable(R.drawable.com_5);
-                    }
-                    else if(val==3){
-                        bitmapdraw=(BitmapDrawable)getResources().getDrawable(R.drawable.com_9);
-                    }
-                    else if(val==4){
-                        bitmapdraw=(BitmapDrawable)getResources().getDrawable(R.drawable.com_6);
-                    }
-                    else if(val==5) {
-                        bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.comp_8);
-
-                    }
-                    Bitmap b=bitmapdraw.getBitmap();
-                    Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
-
-                    marker=mMap.addMarker(new MarkerOptions()
-                                .snippet(str)
-                                .rotation((float)0.0)
-                                .icon(BitmapDescriptorFactory.fromBitmap(smallMarker))
-                                .position(point));
-                   // marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.complaints_5));
-
-                        next.getBackground().setAlpha(255);
-                        next.setEnabled(true);
-                }
-
-
-            }
-        });
-
-
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
 
     }
