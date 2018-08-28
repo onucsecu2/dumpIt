@@ -17,6 +17,7 @@ public class Complaint {
     String date;
     String status;
     String id;
+    String areacode;
     //String comp_url;
     //String accomp_url;
     String rspns;
@@ -27,7 +28,7 @@ public class Complaint {
 
     }
 
-    public Complaint(String uid,String type,int val,double longitude,double latitude,String date,String status,String id,String rspns){
+    public Complaint(String uid,String type,int val,double longitude,double latitude,String date,String status,String id,String rspns,String areacode){
         this.uid=uid;
         this.type=type;
         this.val=val;
@@ -36,6 +37,7 @@ public class Complaint {
         this.date=date;
         this.status=status;
         this.id=id;
+        this.areacode=areacode;
         //this.comp_url=comp_url;
         //this.accomp_url=accomp_url;
         this.rspns=rspns;
@@ -75,5 +77,9 @@ public class Complaint {
 
     public String getRspns() {
         return rspns;
+    }
+
+    public String getAreacode() {
+        return areacode;
     }
 }

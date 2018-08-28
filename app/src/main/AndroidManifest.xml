@@ -40,8 +40,14 @@
             android:name=".InformerHomeActivity"
             android:label="@string/title_activity_informer_home"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SweeperHomeActivity"
+            android:label="sweeper"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".InformerRegActivity" />
+        <activity android:name=".SweeperRegActivity" />
         <activity android:name=".InformerVerificationActivity" />
+        <activity android:name=".SweeperVerificationActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -56,6 +62,9 @@
 
         <activity
             android:name=".MapsActivity"
+            android:label="@string/title_activity_maps" />
+        <activity
+            android:name=".MapsSweeperActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".CameraActivity"></activity>
     </application>

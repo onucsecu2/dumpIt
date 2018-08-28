@@ -80,10 +80,10 @@ public class SweeperHomeActivity extends AppCompatActivity
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position){
                 case 0:
-                    informer_complaints_list tab1 =new informer_complaints_list();
+                    Sweeper_complaints_list tab1 =new Sweeper_complaints_list();
                     return tab1;
                 case 1:
-                    informer_make_complaint tab2 = new informer_make_complaint();
+                    Sweeper_complaints_list tab2 = new Sweeper_complaints_list();
                     return tab2;
                 default:
                     return null;
