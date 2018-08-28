@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,6 +31,8 @@ public class informer_complaints_list extends Fragment {
     List<Complaint> complaintList;
     private DatabaseReference myRef;
     private LinearLayoutManager layoutManager;
+    private FirebaseAuth mAuth;
+    private String uid;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.informer_complaints_list, container, false);
@@ -40,24 +43,24 @@ public class informer_complaints_list extends Fragment {
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(),
                 layoutManager.getOrientation());
         mRecyclerView.addItemDecoration(dividerItemDecoration);
-
-
+        mAuth= FirebaseAuth.getInstance();
         complaintList= new ArrayList<>();
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
 
         //complaintList.add()
+        uid=mAuth.getUid();
+        myRef = FirebaseDatabase.getInstance().getReference("Complaints").child(uid);
 
-        myRef = FirebaseDatabase.getInstance().getReference("Complaints");
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                for(DataSnapshot userID : dataSnapshot.getChildren()) {
-                    for (DataSnapshot locShot : userID.getChildren()) {
-                        Complaint location = locShot.getValue(Complaint.class);
-                        complaintList.add(location);
-                    }
+                for(DataSnapshot locID : dataSnapshot.getChildren()) {
+
+                        Complaint complaint = locID.getValue(Complaint.class);
+                        complaintList.add(complaint);
+
                 }
             }
 

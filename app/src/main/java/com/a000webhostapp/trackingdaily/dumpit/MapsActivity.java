@@ -29,14 +29,18 @@ import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polygon;
+import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.maps.android.PolyUtil;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static java.security.AccessController.getContext;
 
@@ -52,11 +56,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Button next;
     private int tog;
     private int val;
+    private String area_code;
     private LatLng mPoint;
     private String str;
     private FirebaseAuth mAuth;
     private Handler mHandler = new Handler();
     private DatabaseReference myRef;
+    String areacode;
+    private List<Sector>sector= new ArrayList<Sector>();
     int k=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +112,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 intent.putExtra("str",str);
                 intent.putExtra("longitude",mPoint.longitude);
                 intent.putExtra("latitude",mPoint.latitude);
+                intent.putExtra("areacode",area_code);
                 startActivity(intent);
             }
         });
@@ -243,6 +251,45 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+
+        myRef = FirebaseDatabase.getInstance().getReference("Area");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot area : dataSnapshot.getChildren()){
+
+                    AreaCode areaCode = area.getValue(AreaCode.class);
+                    double p11,p12,p21,p22,p31,p32,p41,p42,p51,p52;
+                    p11=areaCode.getP11();
+                    p12=areaCode.getP12();
+                    p21=areaCode.getP21();
+                    p22=areaCode.getP22();
+                    p31=areaCode.getP31();
+                    p32=areaCode.getP32();
+                    p41=areaCode.getP41();
+                    p42=areaCode.getP42();
+                    p51=areaCode.getP51();
+                    p52=areaCode.getP52();
+                    areacode=areaCode.getAreacode();
+                    PolygonOptions rectOptions = new PolygonOptions()
+                            .add(new LatLng(p11, p12),
+                                    new LatLng(p21, p22),
+                                    new LatLng(p31, p32),
+                                    new LatLng(p41, p42),
+                                    new LatLng(p51, p52));
+                    Sector sector1= new Sector(rectOptions,areacode);
+                    sector.add(sector1);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                toastMessage("area retrieve error");
+            }
+        });
+
+
+
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
             @Override
@@ -294,6 +341,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                         next.getBackground().setAlpha(255);
                         next.setEnabled(true);
+                    for (Sector sector1 : sector)
+                    {
+                        PolygonOptions polygonOptions=sector1.getPolygonOptions();
+                        List<LatLng> list;
+                        list=polygonOptions.getPoints();
+                        if(PolyUtil.containsLocation(point,list,false)){
+                            area_code=sector1.getAreacode();
+                            toastMessage(area_code);
+                        }
+                    }
+
                 }
 
 
@@ -305,7 +363,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
     private void toastMessage(String message){
-        Toast.makeText(this,message,Toast.LENGTH_LONG).show();
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
     }
 }
 /*fillColor(0x550000FF));*/

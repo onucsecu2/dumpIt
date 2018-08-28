@@ -155,6 +155,13 @@ public class LoginActivity extends AppCompatActivity {
                                                 mProgressView.setVisibility(View.GONE);
                                                 finish();
                                             }
+                                            if (user.equals("sweeper")) {
+                                                Intent intent = new Intent(LoginActivity.this, SweeperHomeActivity.class);
+                                                //  intent.putExtra("user", fuser);
+                                                startActivity(intent);
+                                                mProgressView.setVisibility(View.GONE);
+                                                finish();
+                                            }
                                         }
 
                                         @Override
@@ -188,6 +195,10 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(user.equalsIgnoreCase("informer")) {
                     Intent intent = new Intent(LoginActivity.this, InformerRegActivity.class);
+                    startActivity(intent);
+                }
+                else if(user.equalsIgnoreCase("sweeper")) {
+                    Intent intent = new Intent(LoginActivity.this, SweeperRegActivity.class);
                     startActivity(intent);
                 }
                 else{

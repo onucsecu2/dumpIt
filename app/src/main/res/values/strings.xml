@@ -6,6 +6,7 @@
     <string name="prompt_email">ই-মেইল দিন</string>
     <string name="prompt_name">আপনার নাম</string>
     <string name="prompt_nid">আপনার জাতীয় পরিচয়পত্র নম্বর</string>
+    <string name="prompt_sweeper_ID">আপনার সেবক নম্বর</string>
     <string name="prompt_phone">মোবাইল নম্বর</string>
     <string name="prompt_addr">যোগাযোগের ঠিকানা</string>
     <string name="prompt_thana">উপজেলা/থানা</string>
@@ -43,7 +44,9 @@
     </string>
     <string name="title_activity_informer">Informer Home</string>
     <string name="informer_tab_text_1">আমার প্রদত্ত তথ্যসমুহ</string>
+    <string name="sweeper_tab_text_1">আমার এলাকা</string>
     <string name="informer_tab_text_2">তথ্য দিন</string>
+    <string name="sweeper_tab_text_2">তথ্য দিন</string>
     <string name="action_logout">লগআউট</string>
     <string name="action_settings">সেটিংস</string>
     <string name="section_format">Hello World from section: %1$d</string>

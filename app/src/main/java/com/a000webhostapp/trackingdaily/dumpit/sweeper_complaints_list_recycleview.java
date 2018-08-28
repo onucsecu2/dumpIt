@@ -16,7 +16,6 @@ import com.google.firebase.storage.StorageReference;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -24,12 +23,12 @@ import java.util.List;
  * Created by onu on 8/24/18.
  */
 
-public class informer_complaints_list_recycleview extends RecyclerView.Adapter<informer_complaints_list_recycleview.complaintsviewHolder> {
+public class sweeper_complaints_list_recycleview extends RecyclerView.Adapter<sweeper_complaints_list_recycleview.complaintsviewHolder> {
 
     private Context context;
     private List<Complaint>complaintList;
 
-    public informer_complaints_list_recycleview(Context context, List<Complaint> complaintList) {
+    public sweeper_complaints_list_recycleview(Context context, List<Complaint> complaintList) {
         this.context = context;
         this.complaintList = complaintList;
     }

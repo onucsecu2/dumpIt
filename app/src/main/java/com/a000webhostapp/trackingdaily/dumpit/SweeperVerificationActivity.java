@@ -1,10 +1,9 @@
 package com.a000webhostapp.trackingdaily.dumpit;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -28,7 +27,7 @@ import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
 
 import java.util.concurrent.TimeUnit;
 
-public class InformerVerificationActivity extends AppCompatActivity {
+public class SweeperVerificationActivity extends AppCompatActivity {
 
     private Button verify;
     private Button finish;
@@ -50,20 +49,22 @@ public class InformerVerificationActivity extends AppCompatActivity {
     private String password;
     private String address;
     private String type;
+    private String sweeper_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_informer_verification);
+        setContentView(R.layout.activity_sweeper_verification);
         Intent recievedIntent= getIntent();
         name = recievedIntent.getStringExtra("name");
-        type="informer";
+        type="sweeper";
         address = recievedIntent.getStringExtra("address");
         nid = recievedIntent.getStringExtra("nid");
-        phone = "+880 1727-946938";//"+88"+recievedIntent.getStringExtra("mobile");
+        phone =  phone = "+880 1727-946938";//recievedIntent.getStringExtra("mobile");
         ward = recievedIntent.getStringExtra("ward");
         email = recievedIntent.getStringExtra("email");
         password = recievedIntent.getStringExtra("password");
+        sweeper_id = recievedIntent.getStringExtra("sweeper");
         verify = (Button)findViewById(R.id.verifyButton);
         verifyTxt = (EditText) findViewById(R.id.verifyTxt);
         finish = (Button)findViewById(R.id.finishButton);
@@ -91,8 +92,8 @@ public class InformerVerificationActivity extends AppCompatActivity {
                 verify.setEnabled(false);
                 cancel.setEnabled(false);
                 firebaseAuthSettings.setAutoRetrievedSmsCodeForPhoneNumber(phone, "123456");
-                Toast.makeText(InformerVerificationActivity.this,"yap",Toast.LENGTH_SHORT).show();
-                PhoneAuthProvider.getInstance().verifyPhoneNumber(phone,120,TimeUnit.SECONDS,InformerVerificationActivity.this,mCallbacks);
+                Toast.makeText(SweeperVerificationActivity.this,"yap",Toast.LENGTH_SHORT).show();
+                PhoneAuthProvider.getInstance().verifyPhoneNumber(phone,120,TimeUnit.SECONDS,SweeperVerificationActivity.this,mCallbacks);
             }
         });
 
@@ -127,7 +128,7 @@ public class InformerVerificationActivity extends AppCompatActivity {
                 // now need to ask the user to enter the code and then construct a credential
                 // by combining the code with a verification ID.
                 //Log.d(TAG, "onCodeSent:" + verificationId);
-                Toast.makeText(InformerVerificationActivity.this,"onCodeSent: ",Toast.LENGTH_LONG).show();
+                Toast.makeText(SweeperVerificationActivity.this,"onCodeSent: ",Toast.LENGTH_LONG).show();
                 // Save verification ID and resending token so we can use them later
                 mVerificationId = verificationId;
                 mResendToken = token;
@@ -156,7 +157,7 @@ public class InformerVerificationActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = task.getResult().getUser();
-                            Toast.makeText(InformerVerificationActivity.this,"successful",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SweeperVerificationActivity.this,"successful",Toast.LENGTH_SHORT).show();
 
                             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
 
@@ -166,24 +167,25 @@ public class InformerVerificationActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     id = mAuth.getUid();
-                                    DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("informer");
-                                    Informer informer = new Informer(name, email, nid, ward, phone, address,type);
-                                    myRef.child(id).setValue(informer);
-                                    Toast.makeText(InformerVerificationActivity.this,"Succesfully Registered", Toast.LENGTH_LONG).show();
+                                    DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("sweeper");
+                                    Sweeper sweeper = new Sweeper(name, email, nid, ward, phone, address,type,sweeper_id,"A1");
+                                    myRef.child(id).setValue(sweeper);
+                                    Toast.makeText(SweeperVerificationActivity.this,"Succesfully Registered", Toast.LENGTH_LONG).show();
 
                                 } else {
-                                Toast.makeText(InformerVerificationActivity.this, "error", Toast.LENGTH_LONG).show();
+                                Toast.makeText(SweeperVerificationActivity.this, "error", Toast.LENGTH_LONG).show();
                                 }
                             }
 
                     });
 
 
-
-                            Intent intent = new Intent(InformerVerificationActivity.this,InformerHomeActivity.class);
+                            /*Sweeper must be accepted by Admin so we cant allow it to activity...new activity is needed*/
+                            /*for simplicity I dont need it now*/
+                            Intent intent = new Intent(SweeperVerificationActivity.this,SweeperHomeActivity.class);
                             startActivity(intent);
                             finish();
-                            Toast.makeText(InformerVerificationActivity.this,"successful",Toast.LENGTH_LONG).show();
+                            Toast.makeText(SweeperVerificationActivity.this,"successful",Toast.LENGTH_LONG).show();
                             // ...
                         } else {
                             // Sign in failed, display a message and update the UI

@@ -59,6 +59,7 @@ public class CameraActivity extends AppCompatActivity {
     private String pathFile;
     private Uri uri;
     private Uri downloadUrl;
+    private String areacode;
     String date;
     private StorageReference storageReference;
     @Override
@@ -77,6 +78,7 @@ public class CameraActivity extends AppCompatActivity {
         Intent recievedIntent= getIntent();
         val = recievedIntent.getIntExtra("val",0);
         str = recievedIntent.getStringExtra("str");
+        areacode = recievedIntent.getStringExtra("areacode");
         longitude=recievedIntent.getDoubleExtra("longitude",0);
         latitude=recievedIntent.getDoubleExtra("latitude",0);
 
@@ -100,7 +102,7 @@ public class CameraActivity extends AppCompatActivity {
                 StorageReference mStorageReference=storageReference.child(userID).child(locID);
 
                 DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Complaints");
-                Complaint complaint = new Complaint(userID,str,val,longitude,latitude,date,"Pending",locID,null);
+                Complaint complaint = new Complaint(userID,str,val,longitude,latitude,date,"Pending",locID,null,areacode);
 
                 /*it will create a random unique string por each compliants.it will be considered as Complaints id*/
 
