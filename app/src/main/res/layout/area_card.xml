@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+    app:cardElevation="12dp"
+    app:cardCornerRadius="12dp"
+    android:id="@+id/parent_layout"
+    android:padding="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="5dp">
+
+        <ImageView
+            android:id="@+id/comp_img"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="10dp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/comp_img"
+            android:text="Status : "
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/comp_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/textView3"
+            android:text="status"
+            android:textColor="@color/red"
+            android:textStyle="bold" />
+
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView3"
+            android:layout_marginTop="8dp"
+            android:layout_toEndOf="@+id/comp_img"
+            android:text="ID : "
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/comp_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView4"
+            android:layout_alignBottom="@+id/textView4"
+            android:layout_alignEnd="@+id/comp_status"
+            android:layout_toEndOf="@+id/textView4"
+            android:text="id"
+            android:textStyle="bold" />
+
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/comp_img"
+            android:layout_marginBottom="16dp"
+            android:layout_toEndOf="@+id/comp_img"
+            android:text="Type : "
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/comp_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView8"
+            android:layout_alignBottom="@+id/textView8"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/textView8"
+            android:text="type"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView5"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/comp_img"
+            android:text="Time : "
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/comp_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/textView5"
+            android:text="time"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textView8"
+            android:layout_alignStart="@+id/textView8"
+            android:layout_marginBottom="10dp"
+            android:text="Response time : "
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/comp_respns"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView9"
+            android:layout_alignBottom="@+id/textView9"
+            android:layout_alignEnd="@+id/textView3"
+            android:layout_toEndOf="@+id/textView9"
+            android:text="time"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
