@@ -11,8 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.github.jlmd.animatedcircleloadingview.AnimatedCircleLoadingView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,94 +32,109 @@ import java.util.List;
  * Created by onu on 7/27/18.
  */
 
-public class sweeper_complaints_list extends Fragment {
-    private RecyclerView mRecyclerView;
-    sweeper_complaints_list_recycleview adapter1;
-    List<Complaint> complaintList1;
+public class admin_new_sweeper_admin extends Fragment {
+
     private DatabaseReference myRef;
-    private DatabaseReference myRef1;
     private LinearLayoutManager layoutManager;
     private FirebaseAuth mAuth;
     private String uid;
-    private Button sweeper_show_area ;
+    private Button done;
+    private Button ok;
+    private EditText acode,code;
+    private RadioGroup radioType;
+    private RadioButton radioButton;
     private String area_code;
+    private LinearLayout extend;
+    private LinearLayout info;
+    private LinearLayout info_process;
+    private AnimatedCircleLoadingView animatedCircleLoadingView;
     int i=0;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.sweeper_complaints_list, container, false);
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.comp_recycleview_sweeper);
-        sweeper_show_area=(Button)rootView.findViewById(R.id.sweeper_show_area);
+        final View rootView = inflater.inflate(R.layout.admin_new_sweeper_admin, container, false);
+        done=(Button)rootView.findViewById(R.id.admin_done);
+        ok=(Button)rootView.findViewById(R.id.ok);
+        acode=(EditText)rootView.findViewById(R.id.areacode);
+        code=(EditText)rootView.findViewById(R.id.code);
+        radioType=(RadioGroup)rootView.findViewById(R.id.radio_type);
+        extend=(LinearLayout)rootView.findViewById(R.id.code_extend);
+        info=(LinearLayout)rootView.findViewById(R.id.getinfo);
+        info_process=(LinearLayout)rootView.findViewById(R.id.info_process);
+        animatedCircleLoadingView=rootView.findViewById(R.id.circle_loading_view);
+        extend.setVisibility(View.INVISIBLE);
+        code.setVisibility(View.GONE);
+        info_process.setVisibility(View.GONE);
+        ok.setVisibility(View.GONE);
         //layoutManager = (LinearLayoutManager) rootView.findViewById(R.id.comp_recycleview_informer_linearLayout);
         layoutManager = new LinearLayoutManager(rootView.getContext());
-
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(),
-                layoutManager.getOrientation());
-        mRecyclerView.addItemDecoration(dividerItemDecoration);
         mAuth= FirebaseAuth.getInstance();
-        complaintList1= new ArrayList<>();
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
 
-        sweeper_show_area.setOnClickListener(new View.OnClickListener() {
+
+        radioType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
             @Override
-            public void onClick(View v) {
-                Intent intent= new Intent(getActivity(),MapsSweeperActivity.class);
-                startActivity(intent);
-                getActivity().finish();
-            }
-        });
-
-        //complaintList.add()
-        uid=mAuth.getUid();
-
-        myRef1 = FirebaseDatabase.getInstance().getReference("sweeper").child(uid);
-        myRef1.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Sweeper sweeper=dataSnapshot.getValue(Sweeper.class);
-                String choda =sweeper.getAreacode();
-                area_code=choda;
-                //ToastMessage(area_code);
-                i++;
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                ToastMessage("something is wrong");
-            }
-        });
-
-       // ToastMessage(String.valueOf(i));
-        //ToastMessage(achoda.get(1));
-
-        myRef = FirebaseDatabase.getInstance().getReference("Complaints");
-
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                for(DataSnapshot userID : dataSnapshot.getChildren()) {
-                    for (DataSnapshot locID : userID.getChildren()) {
-                        Complaint complaint = locID.getValue(Complaint.class);
-                        String areacode_complaint = complaint.getAreacode();
-                        String complaint_status = complaint.getStatus();
-                         if(area_code.equals(areacode_complaint)) {
-                             if(complaint_status.equals("Pending")) {
-                                 complaintList1.add(complaint);
-                             }
-                        }
-                    }
+            public void onCheckedChanged(RadioGroup group, int checkedId)
+            {
+                switch(checkedId)
+                {
+                    case R.id.radio_admin:
+                        // TODO Something
+                        extend.setVisibility(View.GONE);
+                        code.setVisibility(View.VISIBLE);
+                        i=1;
+                        break;
+                    case R.id.radio_sweeper:
+                        // TODO Something
+                        code.setVisibility(View.VISIBLE);
+                        extend.setVisibility(View.VISIBLE);
+                        i=2;
+                        break;
                 }
             }
+        });
 
+        ok.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                ToastMessage("complaints load error");
+            public void onClick(View v) {
+
+                Intent i= new Intent(getActivity(),AdminHomeActivity.class);
+                startActivity(i);
             }
         });
-        adapter1 = new sweeper_complaints_list_recycleview(rootView.getContext(),complaintList1);
-        //adapter1.notifyDataSetChanged();
-        mRecyclerView.setAdapter(adapter1);
+        done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                info.setVisibility(View.GONE);
+                info_process.setVisibility(View.VISIBLE);
+                animatedCircleLoadingView.startDeterminate();
+                animatedCircleLoadingView.setPercent(10);
+                String codetxt,areacodetxt;
+                codetxt=code.getText().toString();
+                animatedCircleLoadingView.setPercent(20);
+                if(i==2){
+                    areacodetxt=acode.getText().toString();
+                    SweeperCode sweeperCode =new SweeperCode(codetxt,false,"",areacodetxt);
+                    animatedCircleLoadingView.setPercent(40);
+                    DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Resource");
+                    animatedCircleLoadingView.setPercent(60);
+                    myRef.child("Sweepers").child(codetxt).setValue(sweeperCode);
+                    animatedCircleLoadingView.setPercent(80);
+                }
+                else{
+                    AdminCode adminCode =new AdminCode(codetxt,false,"");
+                    animatedCircleLoadingView.setPercent(40);
+                    DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Resource");
+                    animatedCircleLoadingView.setPercent(60);
+                    myRef.child("Admins").child(codetxt).setValue(adminCode);
+                    animatedCircleLoadingView.setPercent(80);
+                }
+                animatedCircleLoadingView.stopOk();
+                ok.setVisibility(View.VISIBLE);
+            }
+        });
+
+
+
 
         return rootView;
     }

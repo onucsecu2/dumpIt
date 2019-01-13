@@ -33,8 +33,12 @@
                 android:id="@+id/tabItem2_Sweeper"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/informer_tab_text_2" />
-
+                android:text="@string/sweeper_tab_text_2" />
+            <android.support.design.widget.TabItem
+                android:id="@+id/tabItem3_Sweeper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sweeper_tab_text_3" />
         </android.support.design.widget.TabLayout>
 
     </android.support.design.widget.AppBarLayout>

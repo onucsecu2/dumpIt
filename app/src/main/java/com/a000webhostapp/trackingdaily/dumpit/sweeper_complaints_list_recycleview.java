@@ -1,11 +1,13 @@
 package com.a000webhostapp.trackingdaily.dumpit;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -37,13 +39,14 @@ public class sweeper_complaints_list_recycleview extends RecyclerView.Adapter<sw
     public complaintsviewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //return null;
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view =inflater.inflate(R.layout.informer_complaints_card,null);
+        View view =inflater.inflate(R.layout.complaints_card,null);
         return  new complaintsviewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(complaintsviewHolder holder, int position) {
-            Complaint complaint = complaintList.get(position);
+    public void onBindViewHolder(complaintsviewHolder holder, final int position) {
+
+        Complaint complaint = complaintList.get(position);
             holder.comp_id.setText(complaint.getUid());
             holder.comp_status.setText(complaint.getStatus());
             holder.comp_rspns.setText(complaint.getRspns());
@@ -71,6 +74,27 @@ public class sweeper_complaints_list_recycleview extends RecyclerView.Adapter<sw
                 .load(mStorageReference)
                 .into(holder.comp_img);
 
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(context, ResponseSweeper.class);
+                Complaint comp=complaintList.get(position);
+                intent.putExtra("uid", comp.getUid());
+                intent.putExtra("type", comp.getType());
+                intent.putExtra("id", comp.getId());
+                intent.putExtra("time", comp.getDate());
+                intent.putExtra("status", comp.getStatus());
+                intent.putExtra("lat", comp.getLatitude());
+                intent.putExtra("lon", comp.getLongitude());
+                intent.putExtra("val", comp.getVal());
+                intent.putExtra("areacode", comp.getAreacode());
+                intent.putExtra("response_date", comp.getRspns());
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -93,6 +117,24 @@ public class sweeper_complaints_list_recycleview extends RecyclerView.Adapter<sw
             comp_time=itemView.findViewById(R.id.comp_time);
             comp_type=itemView.findViewById(R.id.comp_type);
             comp_rspns=itemView.findViewById(R.id.comp_respns);
+           // parentLayout=itemView.findViewById(R.id.parent_layout);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, ResponseSweeper.class);
+                    Complaint comp=complaintList.get(1);
+                    intent.putExtra("uid", comp.getUid());
+                    intent.putExtra("type", comp.getType());
+                    intent.putExtra("id", comp.getId());
+                    intent.putExtra("time", comp.getDate());
+                    intent.putExtra("response", comp.getRspns());
+                    intent.putExtra("lat", comp.getLatitude());
+                    intent.putExtra("lon", comp.getLongitude());
+                    context.startActivity(intent);
+                }
+            });
+
         }
     }
 

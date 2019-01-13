@@ -27,6 +27,7 @@ public class Informer {
         this.type=type;
     }
 
+
     public String getEmail() {
         return email;
     }

@@ -1,9 +1,5 @@
 package com.a000webhostapp.trackingdaily.dumpit;
 
-import android.net.Uri;
-
-import java.util.Date;
-
 /**
  * Created by onu on 8/21/18.
  */
@@ -21,6 +17,8 @@ public class Complaint {
     //String comp_url;
     //String accomp_url;
     String rspns;
+    String sid;
+    boolean claim;
 
 
 
@@ -28,7 +26,7 @@ public class Complaint {
 
     }
 
-    public Complaint(String uid,String type,int val,double longitude,double latitude,String date,String status,String id,String rspns,String areacode){
+    public Complaint(String uid,String type,int val,double longitude,double latitude,String date,String status,String id,String rspns,String areacode,String sid,boolean claim){
         this.uid=uid;
         this.type=type;
         this.val=val;
@@ -38,9 +36,15 @@ public class Complaint {
         this.status=status;
         this.id=id;
         this.areacode=areacode;
+        this.sid=sid;
         //this.comp_url=comp_url;
         //this.accomp_url=accomp_url;
         this.rspns=rspns;
+        this.claim= claim;
+    }
+
+    public boolean isClaim() {
+        return claim;
     }
 
     public String getUid() {
@@ -71,6 +75,7 @@ public class Complaint {
         return status;
     }
 
+
     public String getId() {
         return id;
     }
@@ -79,7 +84,16 @@ public class Complaint {
         return rspns;
     }
 
+    public String getSid() {
+        return sid;
+    }
+
     public String getAreacode() {
         return areacode;
+    }
+
+
+    public void setClaim(boolean claim) {
+        this.claim = claim;
     }
 }

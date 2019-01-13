@@ -1,13 +1,13 @@
 package com.a000webhostapp.trackingdaily.dumpit;
 
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.hardware.Camera;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -20,7 +20,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -36,6 +35,7 @@ import com.google.firebase.database.ValueEventListener;
 public class MapsSweeperActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private Button  back;
     private  Marker marker=null;
     private Marker mMarker;
     private  GPSHelper gpsHelper;
@@ -51,18 +51,28 @@ public class MapsSweeperActivity extends FragmentActivity implements OnMapReadyC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps_sweeper);
         mAuth=FirebaseAuth.getInstance();
+        back=(Button)findViewById(R.id.sweeper_back);
+        back.setOnClickListener(new View.OnClickListener() {
 
-        gpsHelper= new GPSHelper(getApplicationContext());
-        mLocation = gpsHelper.getLocation();
-        try {
-            latitude = mLocation.getLatitude();
-            longitude = mLocation.getLongitude();
-        }catch (Exception e){
-            toastMessage(String.valueOf(R.string.reqLocShare));
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MapsSweeperActivity.this, SweeperHomeActivity.class);
+                startActivity(intent);
+            }
+        });
+        LocationManager lm = (LocationManager)getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+        boolean gps_enabled = false;
+        gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+
+        if(!gps_enabled){
+            toastMessage(getResources().getString(R.string.reqLocShare));
             Intent gpsOptionsIntent = new Intent(
-                    android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             startActivity(gpsOptionsIntent);
         }
+        onRestart();
+        //toastMessage("stepped");
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map_sweeper);
@@ -100,8 +110,8 @@ public class MapsSweeperActivity extends FragmentActivity implements OnMapReadyC
 
        Marker mark= mMap.addMarker(new MarkerOptions()
                     .position(latLng)
-                    .title("I'm here...")
-                    .snippet("Now I am here,around the incidence")
+                    .title(String.valueOf(R.string.gps))
+                    .snippet(String.valueOf(R.string.gps_1))
                     .rotation((float) -15.0)
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
 
@@ -165,6 +175,51 @@ public class MapsSweeperActivity extends FragmentActivity implements OnMapReadyC
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
 
     }
+    private void getLocationCurrent(){
+        gpsHelper= new GPSHelper(getApplicationContext());
+        mLocation = gpsHelper.getLocation();
+        try {
+            latitude = mLocation.getLatitude();
+            longitude = mLocation.getLongitude();
+        }catch (Exception e) {
+            toastMessage(getResources().getString(R.string.reqLocShare));
+            // toastMessage(e.getMessage());
+        }
+    }
+    public void onRestart() {
+
+        super.onRestart();
+        // toastMessage("restart");
+        LocationManager lm = (LocationManager)getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+        boolean gps_enabled = false;
+        gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        if(gps_enabled) {
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            getLocationCurrent();
+
+
+            //mLoading.setVisibility(View.GONE);
+            //circleProgressBar.setVisibility(circleProgressBar.GONE);
+            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.map_sweeper);
+            mapFragment.getMapAsync(this);
+
+        }
+        else{
+            toastMessage(getResources().getString(R.string.reqLocShare));
+            Intent gpsOptionsIntent = new Intent(
+                    Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(gpsOptionsIntent);
+        }
+    }
+
+
+
+
     private void toastMessage(String message){
         Toast.makeText(this,message,Toast.LENGTH_LONG).show();
     }

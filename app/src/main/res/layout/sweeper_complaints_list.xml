@@ -2,7 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraintLayout"
+    android:id="@+id/SweeperLayout_complaint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -18,7 +18,7 @@
             android:background="@color/button"
             android:textColor="@color/txt"
             android:padding="2dp"
-            android:textSize="12sp"/>
+            android:textSize="10sp"/>
         <android.support.v7.widget.RecyclerView
             android:id="@+id/comp_recycleview_sweeper"
             android:layout_width="wrap_content"

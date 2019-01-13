@@ -1,9 +1,8 @@
 package com.a000webhostapp.trackingdaily.dumpit;
 
 import android.content.Intent;
-import android.media.Image;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -25,7 +24,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class ResponseSweeper extends AppCompatActivity {
+public class ResponseAdmin extends AppCompatActivity {
 
     private String uid,type,id,time,status,rspns_date,areacode,sid;
     private int val;
@@ -82,7 +81,7 @@ public class ResponseSweeper extends AppCompatActivity {
         StorageReference storageReference= FirebaseStorage.getInstance().getReference();;
         StorageReference mStorageReference=storageReference.child(uid).child(id);
 
-        Glide.with(ResponseSweeper.this)
+        Glide.with(ResponseAdmin.this)
                 .using(new FirebaseImageLoader())
                 .load(mStorageReference)
                 .into(this.bfr);
@@ -93,10 +92,10 @@ public class ResponseSweeper extends AppCompatActivity {
                 DateFormat df = new SimpleDateFormat("ddMMyyyyHHmmss");
                 rspns_date = df.format(Calendar.getInstance().getTime());
                 DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Complaints");
-                Complaint complaint= new Complaint(uid,type,val,lon,lat,time,status,id,rspns_date,areacode,sid);
+                Complaint complaint= new Complaint(uid,type,val,lon,lat,time,status,id,rspns_date,areacode,sid,false);
                 myRef.child(uid).child(id).setValue(complaint);
                 toastMessage("successful");
-                Intent intent = new Intent(ResponseSweeper.this, SweeperHomeActivity.class);
+                Intent intent = new Intent(ResponseAdmin.this, SweeperHomeActivity.class);
                 //intent.putExtra("user", fuser);
                 startActivity(intent);
             }
@@ -104,7 +103,7 @@ public class ResponseSweeper extends AppCompatActivity {
         nxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ResponseSweeper.this, SweeperCameraActivity.class);
+                Intent intent = new Intent(ResponseAdmin.this, SweeperCameraActivity.class);
                 intent.putExtra("id",id);
                 intent.putExtra("uid",uid);
                 intent.putExtra("type",type);

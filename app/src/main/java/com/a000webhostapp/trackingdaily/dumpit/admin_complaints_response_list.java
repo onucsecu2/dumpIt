@@ -27,12 +27,14 @@ import java.util.List;
  * Created by onu on 7/27/18.
  */
 
-public class sweeper_complaints_response_list extends Fragment {
+public class admin_complaints_response_list extends Fragment {
     private RecyclerView mRecyclerView;
-    sweeper_complaints_list_recycleview adapter2;
+    admin_complaints_response_list_recycleview adapter2;
     List<Complaint> complaintList2;
     private DatabaseReference myRef;
     private DatabaseReference myRef1;
+    private Button mapstat;
+    private Button compstat;
     private LinearLayoutManager layoutManager;
     private FirebaseAuth mAuth;
     private String uid;
@@ -40,9 +42,10 @@ public class sweeper_complaints_response_list extends Fragment {
     int i=0;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.sweeper_complaints_response_list, container, false);
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.comp_response_recycleview_sweeper);
-
+        View rootView = inflater.inflate(R.layout.admin_complaints_response_list, container, false);
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.comp_response_recycleview_admin);
+        mapstat=(Button)rootView.findViewById(R.id.map_stat);
+        compstat=(Button)rootView.findViewById(R.id.comp_stat);
         layoutManager = new LinearLayoutManager(rootView.getContext());
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(),
@@ -52,30 +55,6 @@ public class sweeper_complaints_response_list extends Fragment {
         complaintList2= new ArrayList<>();
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
-
-
-        //complaintList.add()
-        uid=mAuth.getUid();
-
-        myRef1 = FirebaseDatabase.getInstance().getReference("sweeper").child(uid);
-        myRef1.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Sweeper sweeper=dataSnapshot.getValue(Sweeper.class);
-                String choda =sweeper.getAreacode();
-                area_code=choda;
-                //ToastMessage(area_code);
-                i++;
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                ToastMessage("something is wrong");
-            }
-        });
-
-       // ToastMessage(String.valueOf(i));
-        //ToastMessage(achoda.get(1));
 
         myRef = FirebaseDatabase.getInstance().getReference("Complaints");
 
@@ -87,12 +66,11 @@ public class sweeper_complaints_response_list extends Fragment {
                     for (DataSnapshot locID : userID.getChildren()) {
                         Complaint complaint = locID.getValue(Complaint.class);
                         String areacode_complaint = complaint.getAreacode();
-                        String status_complaint = complaint.getStatus();
-                         if(area_code.equals(areacode_complaint)) {
-                           if(!status_complaint.equals("Pending")) {
+                        boolean cl = complaint.isClaim();
+                           if(cl==true) {
                                complaintList2.add(complaint);
                            }
-                        }
+
                     }
                 }
             }
@@ -102,9 +80,25 @@ public class sweeper_complaints_response_list extends Fragment {
                 ToastMessage("complaints load error");
             }
         });
-        adapter2 = new sweeper_complaints_list_recycleview(rootView.getContext(),complaintList2);
-        //adapter1.notifyDataSetChanged();
+        adapter2 = new admin_complaints_response_list_recycleview(rootView.getContext(),complaintList2);
+        adapter2.notifyDataSetChanged();
         mRecyclerView.setAdapter(adapter2);
+
+
+        mapstat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(getActivity(),MapStateActivity.class);
+                startActivity(i);
+            }
+        });
+        compstat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(getActivity(),CompStatActivity.class);
+                startActivity(i);
+            }
+        });
 
         return rootView;
     }

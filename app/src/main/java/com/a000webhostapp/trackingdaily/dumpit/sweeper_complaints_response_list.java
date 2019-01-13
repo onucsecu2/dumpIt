@@ -27,42 +27,32 @@ import java.util.List;
  * Created by onu on 7/27/18.
  */
 
-public class sweeper_complaints_list extends Fragment {
+public class sweeper_complaints_response_list extends Fragment {
     private RecyclerView mRecyclerView;
-    sweeper_complaints_list_recycleview adapter1;
-    List<Complaint> complaintList1;
+    sweeper_complaints_list_recycleview adapter2;
+    List<Complaint> complaintList2;
     private DatabaseReference myRef;
     private DatabaseReference myRef1;
     private LinearLayoutManager layoutManager;
     private FirebaseAuth mAuth;
     private String uid;
-    private Button sweeper_show_area ;
     private String area_code;
     int i=0;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.sweeper_complaints_list, container, false);
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.comp_recycleview_sweeper);
-        sweeper_show_area=(Button)rootView.findViewById(R.id.sweeper_show_area);
-        //layoutManager = (LinearLayoutManager) rootView.findViewById(R.id.comp_recycleview_informer_linearLayout);
+        View rootView = inflater.inflate(R.layout.sweeper_complaints_response_list, container, false);
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.comp_response_recycleview_sweeper);
+
         layoutManager = new LinearLayoutManager(rootView.getContext());
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(),
                 layoutManager.getOrientation());
         mRecyclerView.addItemDecoration(dividerItemDecoration);
         mAuth= FirebaseAuth.getInstance();
-        complaintList1= new ArrayList<>();
+        complaintList2= new ArrayList<>();
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
 
-        sweeper_show_area.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent= new Intent(getActivity(),MapsSweeperActivity.class);
-                startActivity(intent);
-                getActivity().finish();
-            }
-        });
 
         //complaintList.add()
         uid=mAuth.getUid();
@@ -72,8 +62,8 @@ public class sweeper_complaints_list extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Sweeper sweeper=dataSnapshot.getValue(Sweeper.class);
-                String choda =sweeper.getAreacode();
-                area_code=choda;
+                String ch =sweeper.getAreacode();
+                area_code=ch;
                 //ToastMessage(area_code);
                 i++;
             }
@@ -97,8 +87,11 @@ public class sweeper_complaints_list extends Fragment {
                     for (DataSnapshot locID : userID.getChildren()) {
                         Complaint complaint = locID.getValue(Complaint.class);
                         String areacode_complaint = complaint.getAreacode();
+                        String status_complaint = complaint.getStatus();
                          if(area_code.equals(areacode_complaint)) {
-                           complaintList1.add(complaint);
+                           if(!status_complaint.equals("Pending")) {
+                               complaintList2.add(complaint);
+                           }
                         }
                     }
                 }
@@ -109,9 +102,9 @@ public class sweeper_complaints_list extends Fragment {
                 ToastMessage("complaints load error");
             }
         });
-        adapter1 = new sweeper_complaints_list_recycleview(rootView.getContext(),complaintList1);
+        adapter2 = new sweeper_complaints_list_recycleview(rootView.getContext(),complaintList2);
         //adapter1.notifyDataSetChanged();
-        mRecyclerView.setAdapter(adapter1);
+        mRecyclerView.setAdapter(adapter2);
 
         return rootView;
     }

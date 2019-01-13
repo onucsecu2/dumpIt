@@ -1,9 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background"
     tools:context="com.a000webhostapp.trackingdaily.dumpit.ConfirmationActivity">
-
-</android.support.constraint.ConstraintLayout>
+    <com.github.jlmd.animatedcircleloadingview.AnimatedCircleLoadingView
+        android:id="@+id/circle_loading_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="15dp"
+        android:background="@color/background"
+        android:layout_centerInParent="true"
+        app:animCircleLoadingView_mainColor="@color/main_color"
+        app:animCircleLoadingView_secondaryColor="@color/secondary_color"
+        app:animCircleLoadingView_textColor="@android:color/white"/>
+    <TextView
+        android:id="@+id/status"
+        android:padding="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/txt"
+        android:text="Uploading ..."
+        android:textStyle="bold"/>
+</LinearLayout>

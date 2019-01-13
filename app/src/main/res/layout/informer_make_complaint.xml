@@ -6,42 +6,69 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     android:padding="10dp">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="15dp"
-        android:textSize="20sp"
-        android:text="@string/select_type_complaints"/>
 
-    <Spinner
-        android:id="@+id/spinner_complaint_type"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown"
-        android:focusable="false" />
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="bottom"
+        android:gravity="top"
         android:layout_margin="10dp"
         android:padding="10dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="15dp"
+            android:textSize="20sp"
+            android:text="@string/select_type_complaints"/>
+
+        <Spinner
+            android:id="@+id/spinner_complaint_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown"
+            android:focusable="false" />
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/informer_next_1"
-            android:text="Next"
+            android:text="@string/next"
             android:textStyle="bold"
             android:background="@color/button"
             android:textColor="@color/txt"
             android:padding="20dp"
             android:textSize="22sp"/>
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom">
+    <com.shuhart.stepview.StepView
+        android:id="@+id/step_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
 
+        app:sv_selectedCircleColor="@color/select_2"
+        app:sv_selectedTextColor="@color/button_1"
+        app:sv_stepLineWidth="3dp"
+        app:sv_stepPadding="4dp"
+        app:sv_nextTextColor="@color/black"
+        app:sv_nextStepLineColor="@color/select_2"
+        app:sv_doneCircleColor="@color/done"
+        app:sv_doneStepLineColor="@color/button"
+        app:sv_doneCircleRadius="12dp"
+        app:sv_selectedCircleRadius="12dp"
+        app:sv_selectedStepNumberColor="@color/button"
+        app:sv_stepViewStyle="@style/StepView"
+        app:sv_doneStepMarkColor="@color/button"
+        app:sv_stepNumberTextSize="12sp"
+        app:sv_animationType="All" />
+    </LinearLayout>
 </LinearLayout>

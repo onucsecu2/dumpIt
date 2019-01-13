@@ -19,6 +19,7 @@ android {
 }
 
 dependencies {
+
     compile 'com.google.maps.android:android-maps-utils:0.5+'
     compile 'com.android.support:support-annotations:27.1.1'
     implementation 'com.firebaseui:firebase-ui-storage:2.0.1'
@@ -44,5 +45,10 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation 'com.shuhart.stepview:stepview:1.4.0'
+    compile 'com.github.jlmd:AnimatedCircleLoadingView:1.1.5@aar'
+    compile 'com.gao.jiefly:abilitychartlibrary:1.0.1'
+
+
 }
 apply plugin: 'com.google.gms.google-services'
