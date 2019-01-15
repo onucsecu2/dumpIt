@@ -87,7 +87,7 @@ public class InformerRegActivity extends AppCompatActivity {
             });
         }
         else {
-            toastMessage("baaal");
+
             submit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

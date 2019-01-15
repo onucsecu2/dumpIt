@@ -92,6 +92,17 @@ public class Complaint {
         return areacode;
     }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setSid(String sid) {
+        this.sid = sid;
+    }
+
+    public void setRspns(String rspns) {
+        this.rspns = rspns;
+    }
 
     public void setClaim(boolean claim) {
         this.claim = claim;

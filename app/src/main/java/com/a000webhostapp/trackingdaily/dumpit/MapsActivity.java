@@ -45,6 +45,7 @@ import java.util.List;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+
     private  Marker marker=null;
     private Marker mMarker;
     private  GPSHelper gpsHelper;

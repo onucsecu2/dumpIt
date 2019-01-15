@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,13 +38,15 @@ public class sweeper_complaints_list extends Fragment {
     private FirebaseAuth mAuth;
     private String uid;
     private Button sweeper_show_area ;
-    private String area_code;
+    private String area_code=null;
+    private ProgressBar mProgressView;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.sweeper_complaints_list, container, false);
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.comp_recycleview_sweeper);
         sweeper_show_area=(Button)rootView.findViewById(R.id.sweeper_show_area);
         //layoutManager = (LinearLayoutManager) rootView.findViewById(R.id.comp_recycleview_informer_linearLayout);
+        mProgressView = (ProgressBar) rootView.findViewById(R.id.sweeper_progress);
         layoutManager = new LinearLayoutManager(rootView.getContext());
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(),
@@ -70,10 +73,13 @@ public class sweeper_complaints_list extends Fragment {
         myRef1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                 Sweeper sweeper=dataSnapshot.getValue(Sweeper.class);
                 String arcd =sweeper.getAreacode();
                 area_code=arcd;
                 //ToastMessage(area_code);
+                mProgressView.setVisibility(View.GONE);
+                populateList();
             }
 
             @Override
@@ -81,8 +87,23 @@ public class sweeper_complaints_list extends Fragment {
                 ToastMessage("something is wrong");
             }
         });
-        //ToastMessage(achoda.get(1));
 
+
+//        ToastMessage(area_code);
+
+        adapter1 = new sweeper_complaints_list_recycleview(rootView.getContext(),complaintList1);
+
+        mRecyclerView.setAdapter(adapter1);
+        adapter1.notifyDataSetChanged();
+        //adapter1.notifyAll();
+        return rootView;
+    }
+
+    private void ToastMessage(String message) {
+            Toast.makeText(getContext(),message,Toast.LENGTH_SHORT).show();
+    }
+    private void populateList(){
+        ToastMessage(area_code);
         myRef = FirebaseDatabase.getInstance().getReference("Complaints");
 
         myRef.addValueEventListener(new ValueEventListener() {
@@ -94,10 +115,10 @@ public class sweeper_complaints_list extends Fragment {
                         Complaint complaint = locID.getValue(Complaint.class);
                         String areacode_complaint = complaint.getAreacode();
                         String complaint_status = complaint.getStatus();
-                         if(area_code.equals(areacode_complaint)) {
-                             if(complaint_status.equals("Pending")) {
-                                 complaintList1.add(complaint);
-                             }
+                        if(area_code.equals(areacode_complaint)) {
+                            if(complaint_status.equalsIgnoreCase("pending")) {
+                                complaintList1.add(complaint);
+                            }
                         }
                     }
                 }
@@ -108,16 +129,6 @@ public class sweeper_complaints_list extends Fragment {
                 ToastMessage("complaints load error");
             }
         });
-        adapter1 = new sweeper_complaints_list_recycleview(rootView.getContext(),complaintList1);
-        adapter1.notifyDataSetChanged();
-        mRecyclerView.setAdapter(adapter1);
-
-        return rootView;
     }
-
-    private void ToastMessage(String message) {
-            Toast.makeText(getContext(),message,Toast.LENGTH_SHORT).show();
-    }
-
 
 }

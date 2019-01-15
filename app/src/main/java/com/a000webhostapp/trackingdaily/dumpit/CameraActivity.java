@@ -96,33 +96,6 @@ public class CameraActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
-
-               /* FirebaseUser user = mAuth.getCurrentUser();
-                String userID = user.getUid();
-                String locID = UUID.randomUUID().toString();
-                StorageReference mStorageReference=storageReference.child(userID).child(locID);
-                DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Complaints");
-                Complaint complaint = new Complaint(userID,str,val,longitude,latitude,date,"Pending",locID,null,areacode,null);
-
-
-                // it will create a random unique string por each compliants.it will be considered as Complaints id
-
-               myRef.child(userID).child(locID).setValue(complaint);
-               mStorageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        downloadUrl = taskSnapshot.getUploadSessionUri();
-                        toastMessage("Upload Success");
-                        progressBar.setVisibility(View.GONE);
-                    }
-
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        toastMessage("Upload Failed");
-                        progressBar.setVisibility(View.GONE);
-                    }
-                });*/
                 Intent intent = new Intent(CameraActivity.this,ConfirmationActivity.class);
                 intent.putExtra("val",val);
                 intent.putExtra("str",str);
@@ -135,7 +108,7 @@ public class CameraActivity extends AppCompatActivity {
 
             }
         });
-        capture.setOnClickListener(new btnTakePhotoClicker());
+            capture.setOnClickListener(new btnTakePhotoClicker());
 
     }
 
@@ -159,11 +132,11 @@ public class CameraActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == CAM_REQUEST){
+
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             capture_cam.setImageBitmap(bitmap);
             // CALL THIS METHOD TO GET THE URI FROM THE BITMAP
             Uri tempUri = getImageUri(getApplicationContext(), bitmap);
-
             // CALL THIS METHOD TO GET THE ACTUAL PATH
             File finalFile = new File(getRealPathFromURI(tempUri));
             pathFile= getRealPathFromURI(tempUri);

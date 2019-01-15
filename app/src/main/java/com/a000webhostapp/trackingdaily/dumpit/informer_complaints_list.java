@@ -72,8 +72,11 @@ public class informer_complaints_list extends Fragment {
             }
         });
         adapter = new informer_complaints_list_recycleview(rootView.getContext(),complaintList);
-        adapter.notifyDataSetChanged();
+
         mRecyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+      /*  notifyItemRangeChanged(getAdapterPosition(),mDataSet.size());
+        notifyItemRemoved(getAdapterPosition());*/
         return rootView;
     }
 

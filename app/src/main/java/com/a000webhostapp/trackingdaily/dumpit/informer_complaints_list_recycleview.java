@@ -47,15 +47,18 @@ public class informer_complaints_list_recycleview extends RecyclerView.Adapter<i
     }
 
     @Override
-    public void onBindViewHolder(complaintsviewHolder holder, final int position) {
+    public void onBindViewHolder(final complaintsviewHolder holder, final int position) {
 
              complaint = complaintList.get(position);
             holder.comp_id.setText(complaint.getId());
             holder.comp_status.setText(complaint.getStatus());
             holder.comp_rspns.setText(complaint.getRspns());
-            if(complaint.getStatus().equals("Completed")){
+            if(complaint.getStatus().equalsIgnoreCase("completed")){
                 holder.del.setVisibility(View.VISIBLE);
                 holder.claim.setVisibility(View.VISIBLE);
+            }else{
+                holder.del.setVisibility(View.GONE);
+                holder.claim.setVisibility(View.GONE);
             }
             String str_date =complaint.getDate();
 
@@ -85,21 +88,23 @@ public class informer_complaints_list_recycleview extends RecyclerView.Adapter<i
             @Override
             public void onClick(View v) {
                 Complaint comp=complaintList.get(position);
-
                 DatabaseReference myref = FirebaseDatabase.getInstance().getReference("Complaints").child(comp.getUid()).child(comp.getId());
-               // Toast.makeText(v.getContext(),comp.getId(),Toast.LENGTH_SHORT).show();
-
                 myref.removeValue();
+                notifyItemRemoved(holder.getAdapterPosition());
+
             }
         });
         holder.claim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Complaint comp=complaintList.get(position);
-
                 DatabaseReference myref = FirebaseDatabase.getInstance().getReference("Complaints").child(comp.getUid()).child(comp.getId());
+                comp.setStatus("Reported");
                 comp.setClaim(true);
                 myref.setValue(comp);
+                notifyItemChanged(holder.getAdapterPosition());
+
+                //context.notifyAll();
             }
         });
 

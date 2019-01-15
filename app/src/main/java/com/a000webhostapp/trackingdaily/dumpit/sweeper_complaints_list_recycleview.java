@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -44,7 +45,7 @@ public class sweeper_complaints_list_recycleview extends RecyclerView.Adapter<sw
     }
 
     @Override
-    public void onBindViewHolder(complaintsviewHolder holder, final int position) {
+    public void onBindViewHolder(final complaintsviewHolder holder, final int position) {
 
         Complaint complaint = complaintList.get(position);
             holder.comp_id.setText(complaint.getUid());
@@ -78,7 +79,7 @@ public class sweeper_complaints_list_recycleview extends RecyclerView.Adapter<sw
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                notifyItemRemoved(holder.getAdapterPosition());
                 Intent intent = new Intent(context, ResponseSweeper.class);
                 Complaint comp=complaintList.get(position);
                 intent.putExtra("uid", comp.getUid());
@@ -92,6 +93,9 @@ public class sweeper_complaints_list_recycleview extends RecyclerView.Adapter<sw
                 intent.putExtra("areacode", comp.getAreacode());
                 intent.putExtra("response_date", comp.getRspns());
                 context.startActivity(intent);
+                //notifyItemChanged(holder.getAdapterPosition());
+                //notifyItemRemoved(holder.getAdapterPosition());
+
             }
         });
 
@@ -107,7 +111,7 @@ public class sweeper_complaints_list_recycleview extends RecyclerView.Adapter<sw
 
         ImageView comp_img;
         TextView comp_status,comp_id,comp_time,comp_rspns,comp_type;
-
+        Button del,claim;
         public complaintsviewHolder(View itemView) {
             super(itemView);
 
@@ -119,7 +123,15 @@ public class sweeper_complaints_list_recycleview extends RecyclerView.Adapter<sw
             comp_rspns=itemView.findViewById(R.id.comp_respns);
            // parentLayout=itemView.findViewById(R.id.parent_layout);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+            del=itemView.findViewById(R.id.del);
+            claim =itemView.findViewById(R.id.claim);
+
+            del.setVisibility(View.GONE);
+            claim.setVisibility(View.GONE);
+
+          /*  del.setText("Engaged");
+            claim.setText("Completed");*/
+           /* itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, ResponseSweeper.class);
@@ -133,7 +145,7 @@ public class sweeper_complaints_list_recycleview extends RecyclerView.Adapter<sw
                     intent.putExtra("lon", comp.getLongitude());
                     context.startActivity(intent);
                 }
-            });
+            });*/
 
         }
     }

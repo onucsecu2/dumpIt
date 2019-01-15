@@ -80,7 +80,7 @@ public class InformerVerificationActivity extends AppCompatActivity {
         type="informer";
         address = recievedIntent.getStringExtra("address");
         nid = recievedIntent.getStringExtra("nid");
-        phone = "+880 1863-610265";//"+88"+recievedIntent.getStringExtra("mobile");
+        phone = "+880 1727-946938";//"+88"+recievedIntent.getStringExtra("mobile");
         ward = recievedIntent.getStringExtra("ward");
         email = recievedIntent.getStringExtra("email");
         password = recievedIntent.getStringExtra("password");
@@ -95,6 +95,7 @@ public class InformerVerificationActivity extends AppCompatActivity {
         circleProgressBar=(CircleProgressBar)findViewById(R.id.mProgressbar);
         circleProgressBar.setVisibility(circleProgressBar.INVISIBLE);
         circleProgressBar.setCircleBackgroundEnabled(false);
+
         mAuth= FirebaseAuth.getInstance();
         firebaseAuthSettings = mAuth.getFirebaseAuthSettings();
 
@@ -113,8 +114,8 @@ public class InformerVerificationActivity extends AppCompatActivity {
                 cancel.getBackground().setAlpha(100);
                 verify.setEnabled(false);
                 cancel.setEnabled(false);
-               // firebaseAuthSettings.setAutoRetrievedSmsCodeForPhoneNumber(phone, "123456");
-                firebaseAuthSettings.setAutoRetrievedSmsCodeForPhoneNumber(phone, verifyTxt.getText().toString().trim());
+                 firebaseAuthSettings.setAutoRetrievedSmsCodeForPhoneNumber(phone, "123456");
+                //firebaseAuthSettings.setAutoRetrievedSmsCodeForPhoneNumber(phone, verifyTxt.getText().toString().trim());
 
                 Toast.makeText(InformerVerificationActivity.this,"Verifying",Toast.LENGTH_SHORT).show();
 
@@ -136,14 +137,16 @@ public class InformerVerificationActivity extends AppCompatActivity {
             public void onVerificationCompleted(final PhoneAuthCredential phoneAuthCredential) {
                 if (google!=null && google.equalsIgnoreCase("yes")) {
                     GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
-                    toastMessage("part 1.0");
+                    //toastMessage("part 1.0");
                     gcredential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
-                    List<? extends UserInfo> providerData = mAuth.getCurrentUser().getProviderData();
+                   /* List<? extends UserInfo> providerData = mAuth.getCurrentUser().getProviderData();
                     FirebaseUser user = mAuth.getCurrentUser();
                     for (UserInfo userInfo : providerData ) {
 
+
                         String providerId = userInfo.getProviderId();
 
+                        //toastMessage(providerId+" this is "+user.getUid());
 
                         user.unlink(providerId)
                                 .addOnCompleteListener(InformerVerificationActivity.this,
@@ -152,32 +155,27 @@ public class InformerVerificationActivity extends AppCompatActivity {
                                             public void onComplete(@NonNull Task<AuthResult> task) {
                                                 if (!task.isSuccessful()) {
                                                     // Handle error
+                                                    toastMessage(task.getException().getMessage()+" unlink hoy nai ");
                                                 }
                                             }
                                         });
-                    }
+                    }*/
                     signInWithPhoneAuthCredential(phoneAuthCredential);
-
-
-
                 }else{
-
 
                             mAuth.createUserWithEmailAndPassword(email, password)
                                 .addOnCompleteListener(InformerVerificationActivity.this, new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
-                                        FirebaseUser user = mAuth.getCurrentUser();
+                                        //FirebaseUser user = mAuth.getCurrentUser();
                                         epcredential= EmailAuthProvider.getCredential(email, password);
 
-                                        List<? extends UserInfo> providerData = mAuth.getCurrentUser().getProviderData();
+                                       /* List<? extends UserInfo> providerData = mAuth.getCurrentUser().getProviderData();
 
                                         for (UserInfo userInfo : providerData ) {
 
                                             String providerId = userInfo.getProviderId();
-
-
                                             user.unlink(providerId)
                                                     .addOnCompleteListener(InformerVerificationActivity.this,
                                                             new OnCompleteListener<AuthResult>() {
@@ -185,15 +183,15 @@ public class InformerVerificationActivity extends AppCompatActivity {
                                                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                                                     if (!task.isSuccessful()) {
                                                                         // Handle error
+                                                                        toastMessage(task.getException().getMessage());
                                                                     }
                                                                 }
                                                             });
-                                        }
-
+                                        }*/
                                         signInWithPhoneAuthEmailPassCredential(phoneAuthCredential);
 
                                     } else {
-                                        toastMessage("error!!");
+                                        toastMessage("error!! "+task.getException().getMessage());
                                     }
                                 }
                             });
@@ -239,9 +237,11 @@ public class InformerVerificationActivity extends AppCompatActivity {
     }
 
     private void signInWithPhoneAuthEmailPassCredential(PhoneAuthCredential phoneAuthCredential) {
-        mAuth.getCurrentUser().linkWithCredential(epcredential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        mAuth.getCurrentUser().linkWithCredential(phoneAuthCredential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+
+
                 if (task.isSuccessful()) {
                     FirebaseUser user = task.getResult().getUser();
                     String id = mAuth.getUid();
@@ -256,19 +256,19 @@ public class InformerVerificationActivity extends AppCompatActivity {
                 }
                 else{
                     // Sign in failed, display a message and update the UI
+                    toastMessage(task.getException().getMessage());
                    // toastMessage(mAuth.getUid() + " " + uid);
                     if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                         // The verification code entered was invalid
                         vStatus.setText(R.string.descript_error_verification_2);
                     }
-
                 }
             }
         });
     }
 
     private void signInWithPhoneAuthCredential(final PhoneAuthCredential credential) {
-        mAuth.getCurrentUser().linkWithCredential(gcredential)
+        mAuth.getCurrentUser().linkWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -283,14 +283,11 @@ public class InformerVerificationActivity extends AppCompatActivity {
                                 startActivity(intent);
                                 finish();
 
-
-
                         }
 
                         else {
                             // Sign in failed, display a message and update the UI
-
-                            toastMessage(task.getException().getMessage());
+                            toastMessage(task.getException().getMessage()+" ********** ");
 
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                 // The verification code entered was invalid
@@ -300,12 +297,13 @@ public class InformerVerificationActivity extends AppCompatActivity {
                     }
                 });
     }
+
     private void toastMessage(String message){
         Toast.makeText(this,message,Toast.LENGTH_LONG).show();
     }
 }
 
-/*                                mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+/*                              mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                     String id;
                                     @Override
                                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -329,4 +327,5 @@ public class InformerVerificationActivity extends AppCompatActivity {
                                 finish();
                                 Toast.makeText(InformerVerificationActivity.this, "successful", Toast.LENGTH_LONG).show();
                                 // ...
-                            }*/
+                            }
+*/

@@ -85,9 +85,9 @@ public class SweeperHomeActivity extends AppCompatActivity
                 case 1:
                     sweeper_complaints_response_list tab2 = new sweeper_complaints_response_list();
                     return tab2;
-                case 2:
+               /* case 2:
                     sweeper_complaints_list tab3 = new sweeper_complaints_list();
-                    return tab3;
+                    return tab3;*/
                 default:
                     return null;
             }
@@ -96,7 +96,7 @@ public class SweeperHomeActivity extends AppCompatActivity
         @Override
         public int getCount() {
             // Show 2 total pages.
-            return 3;
+            return 2;
         }
     }
 
