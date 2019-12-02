@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,8 +13,6 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthSettings;
-import com.google.firebase.auth.PhoneAuthCredential;
-import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
 
-public class SweeperIDActivity extends AppCompatActivity {
+public class AdminIDActivity extends AppCompatActivity {
 
     private EditText sweeper_id;
     private Button verify;
@@ -45,20 +41,20 @@ public class SweeperIDActivity extends AppCompatActivity {
     private String password;
     private String address;
     private String type;
-    private String sweeper_str;
+    private String admin_str;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_sweeper_id_verify);
+        setContentView(R.layout.activity_admin_id_verify);
         //next=(Button)findViewById(R.id.verifyButton_sw_id);
 
-        verify = (Button)findViewById(R.id.verifyButton_sw_id);
-        verifyTxt = (EditText) findViewById(R.id.verifyTxt_sw_id);
-        next = (Button)findViewById(R.id.finishButton_sw_id);
-        cancel = (Button)findViewById(R.id.cancelButton_sw_id);
-        vStatus=(TextView)findViewById(R.id.verificationStatus_sw_id);
-        circleProgressBar=(CircleProgressBar)findViewById(R.id.mProgressbar_sw_id);
+        verify = (Button)findViewById(R.id.verifyButton_ad_id);
+        verifyTxt = (EditText) findViewById(R.id.verifyTxt_ad_id);
+        next = (Button)findViewById(R.id.finishButton_ad_id);
+        cancel = (Button)findViewById(R.id.cancelButton_ad_id);
+        vStatus=(TextView)findViewById(R.id.verificationStatus_ad_id);
+        circleProgressBar=(CircleProgressBar)findViewById(R.id.mProgressbar_ad_id);
         circleProgressBar.setVisibility(circleProgressBar.INVISIBLE);
         circleProgressBar.setCircleBackgroundEnabled(false);
 
@@ -66,7 +62,7 @@ public class SweeperIDActivity extends AppCompatActivity {
 
         Intent recievedIntent= getIntent();
         name = recievedIntent.getStringExtra("name");
-        type="sweeper";
+        type="admin";
         address = recievedIntent.getStringExtra("address");
         nid = recievedIntent.getStringExtra("nid");
         phone = recievedIntent.getStringExtra("mobile");
@@ -88,7 +84,7 @@ public class SweeperIDActivity extends AppCompatActivity {
         verify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sweeper_str=verifyTxt.getText().toString();
+                admin_str=verifyTxt.getText().toString();
                 vStatus.setText(R.string.descript_verify_2);
                 circleProgressBar.setVisibility(circleProgressBar.VISIBLE);
 
@@ -99,14 +95,14 @@ public class SweeperIDActivity extends AppCompatActivity {
                 cancel.setEnabled(false);
                 next.setEnabled(false);
 
-                DatabaseReference myRef2= FirebaseDatabase.getInstance().getReference("Resource").child("Sweepers").child(sweeper_str);
+                DatabaseReference myRef2= FirebaseDatabase.getInstance().getReference("Resource").child("Admins").child(admin_str);
                 myRef2.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if(dataSnapshot.exists()) {
-                            SweeperCode sweeperCode = dataSnapshot.getValue(SweeperCode.class);
-                            boolean bool=sweeperCode.isBool();
-                            ToastMessage(sweeper_str);
+                            AdminCode adminCode = dataSnapshot.getValue(AdminCode.class);
+                            boolean bool=adminCode.isBool();
+                            ToastMessage(admin_str);
                             if(bool){
                                 verify.getBackground().setAlpha(100);
                                 cancel.getBackground().setAlpha(255);
@@ -115,7 +111,7 @@ public class SweeperIDActivity extends AppCompatActivity {
                                 cancel.setEnabled(true);
                                 next.setEnabled(false);
                                 circleProgressBar.setVisibility(circleProgressBar.GONE);
-                                vStatus.setText(R.string.descript_error_verification_6);
+                                vStatus.setText(R.string.descript_error_verification_5);
                                 //ToastMessage(" True paice");
 
                             }
@@ -140,7 +136,7 @@ public class SweeperIDActivity extends AppCompatActivity {
                             cancel.setEnabled(true);
                             next.setEnabled(false);
                             circleProgressBar.setVisibility(circleProgressBar.GONE);
-                            vStatus.setText(R.string.descript_error_verification_6);
+                            vStatus.setText(R.string.descript_error_verification_5);
                           //  ToastMessage("nai nai");
 
                         }
@@ -156,7 +152,7 @@ public class SweeperIDActivity extends AppCompatActivity {
                         cancel.setEnabled(true);
                         next.setEnabled(false);
                         circleProgressBar.setVisibility(circleProgressBar.GONE);
-                        vStatus.setText(R.string.descript_error_verification_6);
+                        vStatus.setText(R.string.descript_error_verification_5);
                        // ToastMessage("something is not wrong");
                     }
                 });
@@ -169,7 +165,7 @@ public class SweeperIDActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(SweeperIDActivity.this, SweeperVerificationActivity.class);
+                Intent intent = new Intent(AdminIDActivity.this,AdminVerificationActivity.class);
                 intent.putExtra("email", email);
                 intent.putExtra("password", password);
                 intent.putExtra("name", name);
@@ -177,7 +173,7 @@ public class SweeperIDActivity extends AppCompatActivity {
                 intent.putExtra("ward", ward);
                 intent.putExtra("address", address);
                 intent.putExtra("nid", nid);
-                intent.putExtra("sweeper", sweeper_str);
+                intent.putExtra("code", admin_str);
 
                 startActivity(intent);
                 finish();

@@ -24,73 +24,51 @@ import java.util.List;
  * Created by onu on 8/24/18.
  */
 
-public class sweeper_complaints_response_list_recycleview extends RecyclerView.Adapter<sweeper_complaints_response_list_recycleview.complaintsviewHolder> {
+public class admin_area_recycleview extends RecyclerView.Adapter<admin_area_recycleview.areaviewHolder> {
 
     private Context context;
-    private List<Complaint>complaintList;
+    private List<AreaCode>areaList;
 
-    public sweeper_complaints_response_list_recycleview(Context context, List<Complaint> complaintList) {
+    public admin_area_recycleview(Context context, List<AreaCode> areaList) {
         this.context = context;
-        this.complaintList = complaintList;
+        this.areaList = areaList;
     }
 
     @Override
-    public complaintsviewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public areaviewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //return null;
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view =inflater.inflate(R.layout.complaints_card,null);
-        return  new complaintsviewHolder(view);
+        View view =inflater.inflate(R.layout.area_card,null);
+        return  new areaviewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(complaintsviewHolder holder, final int position) {
+    public void onBindViewHolder(areaviewHolder holder, final int position) {
 
-        Complaint complaint = complaintList.get(position);
-            holder.comp_id.setText(complaint.getUid());
-            holder.comp_status.setText(complaint.getStatus());
-            holder.comp_rspns.setText(complaint.getRspns());
-            String str_date =complaint.getDate();
-
-
-            String date = "";
-            try {
-                DateFormat df = new SimpleDateFormat("ddMMyyyyHHmmss");
-
-                Date dt1 = df.parse(str_date);
-
-                DateFormat df2 = new SimpleDateFormat("dd MMM,yyyy HH:mm:ss a");
-                date = df2.format(dt1);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            
-            holder.comp_time.setText(date);
-            holder.comp_type.setText(complaint.getType());
-            StorageReference storageReference= FirebaseStorage.getInstance().getReference();;
-            StorageReference mStorageReference=storageReference.child("Completed").child(complaint.getId());
-            Glide.with( context)
-                .using(new FirebaseImageLoader())
-                .load(mStorageReference)
-                .into(holder.comp_img);
-
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        AreaCode areaCode = areaList.get(position);
+            holder.admin_areacode.setText(areaCode.getAreacode());
+            holder.admin_area.setText(areaCode.getDescr());
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(context, ResponseSweeper.class);
-                Complaint comp=complaintList.get(position);
-                intent.putExtra("uid", comp.getUid());
-                intent.putExtra("type", comp.getType());
-                intent.putExtra("id", comp.getId());
-                intent.putExtra("time", comp.getDate());
-                intent.putExtra("status", comp.getStatus());
-                intent.putExtra("lat", comp.getLatitude());
-                intent.putExtra("lon", comp.getLongitude());
-                intent.putExtra("val", comp.getVal());
-                intent.putExtra("areacode", comp.getAreacode());
-                intent.putExtra("response_date", comp.getRspns());
+                Intent intent = new Intent(context, AdminAreaGPS.class);
+                AreaCode areaCode=areaList.get(position);
+                intent.putExtra("p11", areaCode.getP11());
+                intent.putExtra("p12", areaCode.getP12());
+                intent.putExtra("p21", areaCode.getP21());
+                intent.putExtra("p22", areaCode.getP22());
+                intent.putExtra("p31", areaCode.getP31());
+                intent.putExtra("p32", areaCode.getP32());
+                intent.putExtra("p41", areaCode.getP41());
+                intent.putExtra("p42", areaCode.getP42());
+                intent.putExtra("p51", areaCode.getP51());
+                intent.putExtra("p52", areaCode.getP52());
+                intent.putExtra("areacode", areaCode.getAreacode());
+                intent.putExtra("descript", areaCode.getDescr());
+
                 context.startActivity(intent);
+
             }
         });
 
@@ -98,41 +76,18 @@ public class sweeper_complaints_response_list_recycleview extends RecyclerView.A
 
     @Override
     public int getItemCount() {
-        //return 0;
-        return complaintList.size();
+        return areaList.size();
     }
 
-    class complaintsviewHolder extends RecyclerView.ViewHolder{
+    class areaviewHolder extends RecyclerView.ViewHolder{
 
-        ImageView comp_img;
-        TextView comp_status,comp_id,comp_time,comp_rspns,comp_type;
+        TextView admin_areacode,admin_area;
 
-        public complaintsviewHolder(View itemView) {
+        public areaviewHolder(View itemView) {
             super(itemView);
 
-            comp_img=itemView.findViewById(R.id.comp_img);
-            comp_status=itemView.findViewById(R.id.comp_status);
-            comp_id=itemView.findViewById(R.id.comp_id);
-            comp_time=itemView.findViewById(R.id.comp_time);
-            comp_type=itemView.findViewById(R.id.comp_type);
-            comp_rspns=itemView.findViewById(R.id.comp_respns);
-           // parentLayout=itemView.findViewById(R.id.parent_layout);
-
-            /*itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, ResponseSweeper.class);
-                   // Complaint comp=complaintList.get(1);
-                    intent.putExtra("uid", comp.getUid());
-                    intent.putExtra("type", comp.getType());
-                    intent.putExtra("id", comp.getId());
-                    intent.putExtra("time", comp.getDate());
-                    intent.putExtra("response", comp.getRspns());
-                    intent.putExtra("lat", comp.getLatitude());
-                    intent.putExtra("lon", comp.getLongitude());
-                    context.startActivity(intent);
-                }
-            });*/
+            admin_area=itemView.findViewById(R.id.admin_area);
+            admin_areacode=itemView.findViewById(R.id.admin_areacode);
 
         }
     }

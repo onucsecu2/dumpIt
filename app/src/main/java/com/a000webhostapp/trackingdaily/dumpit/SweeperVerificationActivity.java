@@ -1,9 +1,14 @@
 package com.a000webhostapp.trackingdaily.dumpit;
 
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.LifecycleObserver;
+import android.arch.lifecycle.OnLifecycleEvent;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -13,6 +18,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseError;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,13 +27,19 @@ import com.google.firebase.auth.FirebaseAuthSettings;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
 
+
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-public class SweeperVerificationActivity extends AppCompatActivity {
+public class SweeperVerificationActivity extends AppCompatActivity{
 
     private Button verify;
     private Button finish;
@@ -35,10 +47,10 @@ public class SweeperVerificationActivity extends AppCompatActivity {
     private EditText verifyTxt;
     private FirebaseAuthSettings firebaseAuthSettings;
     private FirebaseAuth mAuth;
+    private TextView vStatus;
     private FirebaseAuth.AuthStateListener mAuthlistener;
     private  PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
     private CircleProgressBar circleProgressBar;
-    private TextView vStatus;
     private String mVerificationId;
     private PhoneAuthProvider.ForceResendingToken mResendToken;
     private String phone;
@@ -50,6 +62,11 @@ public class SweeperVerificationActivity extends AppCompatActivity {
     private String address;
     private String type;
     private String sweeper_id;
+    private String areacode;
+    private int bool;
+    private int res=0;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,138 +82,149 @@ public class SweeperVerificationActivity extends AppCompatActivity {
         email = recievedIntent.getStringExtra("email");
         password = recievedIntent.getStringExtra("password");
         sweeper_id = recievedIntent.getStringExtra("sweeper");
-        verify = (Button)findViewById(R.id.verifyButton);
-        verifyTxt = (EditText) findViewById(R.id.verifyTxt);
-        finish = (Button)findViewById(R.id.finishButton);
-        cancel = (Button)findViewById(R.id.cancelButton);
-        vStatus=(TextView)findViewById(R.id.verificationStatus);
+        areacode = recievedIntent.getStringExtra("areacode");
 
-        finish.setEnabled(false);
-        finish.getBackground().setAlpha(100);
-        circleProgressBar=(CircleProgressBar)findViewById(R.id.mProgressbar);
+        verify = (Button)findViewById(R.id.verifyButton_sw);
+        verifyTxt = (EditText) findViewById(R.id.verifyTxt_sw);
+        finish = (Button)findViewById(R.id.finishButton_sw);
+        cancel = (Button)findViewById(R.id.cancelButton_sw);
+        vStatus=(TextView)findViewById(R.id.verificationStatus_sw);
+        circleProgressBar=(CircleProgressBar)findViewById(R.id.mProgressbar_sw);
         circleProgressBar.setVisibility(circleProgressBar.INVISIBLE);
         circleProgressBar.setCircleBackgroundEnabled(false);
 
         mAuth= FirebaseAuth.getInstance();
         firebaseAuthSettings = mAuth.getFirebaseAuthSettings();
 
+
+            finish.setEnabled(false);
+            verify.setEnabled(true);
+            cancel.setEnabled(true);
+            finish.getBackground().setAlpha(100);
+            verify.getBackground().setAlpha(255);
+            cancel.getBackground().setAlpha(255);
+
         verify.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                vStatus.setText(R.string.descript_error_verification_1);
-                mAuth.setLanguageCode("en");
-                circleProgressBar.setVisibility(circleProgressBar.VISIBLE);
+                @Override
+                public void onClick(View v) {
+                    vStatus.setText(R.string.descript_error_verification_1);
+                    mAuth.setLanguageCode("en");
+                    circleProgressBar.setVisibility(circleProgressBar.VISIBLE);
 
-                verify.getBackground().setAlpha(100);
-                cancel.getBackground().setAlpha(100);
-                verify.setEnabled(false);
-                cancel.setEnabled(false);
-                firebaseAuthSettings.setAutoRetrievedSmsCodeForPhoneNumber(phone, "123456");
-                Toast.makeText(SweeperVerificationActivity.this,"yap",Toast.LENGTH_SHORT).show();
-                PhoneAuthProvider.getInstance().verifyPhoneNumber(phone,120,TimeUnit.SECONDS,SweeperVerificationActivity.this,mCallbacks);
-            }
-        });
+                    verify.getBackground().setAlpha(100);
+                    cancel.getBackground().setAlpha(100);
+                    verify.setEnabled(false);
+                    cancel.setEnabled(false);
+                    firebaseAuthSettings.setAutoRetrievedSmsCodeForPhoneNumber(phone, "123456");
+                    Toast.makeText(SweeperVerificationActivity.this, "yap", Toast.LENGTH_SHORT).show();
+                    PhoneAuthProvider.getInstance().verifyPhoneNumber(phone, 120, TimeUnit.SECONDS, SweeperVerificationActivity.this, mCallbacks);
+                }
+            });
 
-        finish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String verificationCode = verifyTxt.getText().toString();
-                PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, verificationCode);
-                signInWithPhoneAuthCredential(credential);
-            }
-        });
+            finish.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String verificationCode = verifyTxt.getText().toString();
+                    PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, verificationCode);
+                    signInWithPhoneAuthCredential(credential);
+                }
+            });
 
-        mCallbacks =new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-            @Override
-            public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
+            mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                @Override
+                public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
                     signInWithPhoneAuthCredential(phoneAuthCredential);
-            }
+                }
 
-            @Override
-            public void onVerificationFailed(FirebaseException e) {
-                vStatus.setText(R.string.descript_error_verification_4);
-                verify.getBackground().setAlpha(255);
-                cancel.getBackground().setAlpha(255);
-                verify.setEnabled(true);
-                cancel.setEnabled(true);
-                circleProgressBar.setVisibility(circleProgressBar.GONE);
-            }
+                @Override
+                public void onVerificationFailed(FirebaseException e) {
+                    vStatus.setText(R.string.descript_error_verification_4);
+                    verify.getBackground().setAlpha(255);
+                    cancel.getBackground().setAlpha(255);
+                    verify.setEnabled(true);
+                    cancel.setEnabled(true);
+                    circleProgressBar.setVisibility(circleProgressBar.GONE);
+                }
 
-            public void onCodeSent(String verificationId,
-                                   PhoneAuthProvider.ForceResendingToken token) {
-                // The SMS verification code has been sent to the provided phone number, we
-                // now need to ask the user to enter the code and then construct a credential
-                // by combining the code with a verification ID.
-                //Log.d(TAG, "onCodeSent:" + verificationId);
-                Toast.makeText(SweeperVerificationActivity.this,"onCodeSent: ",Toast.LENGTH_LONG).show();
-                // Save verification ID and resending token so we can use them later
-                mVerificationId = verificationId;
-                mResendToken = token;
-                vStatus.setText(R.string.descript_error_verification_3);
-                circleProgressBar.setVisibility(circleProgressBar.INVISIBLE);
-                finish.getBackground().setAlpha(255);
-                verify.getBackground().setAlpha(100);
-                cancel.getBackground().setAlpha(100);
+                public void onCodeSent(String verificationId,
+                                       PhoneAuthProvider.ForceResendingToken token) {
+                    // The SMS verification code has been sent to the provided phone number, we
+                    // now need to ask the user to enter the code and then construct a credential
+                    // by combining the code with a verification ID.
+                    //Log.d(TAG, "onCodeSent:" + verificationId);
+                    Toast.makeText(SweeperVerificationActivity.this, "onCodeSent: ", Toast.LENGTH_LONG).show();
+                    // Save verification ID and resending token so we can use them later
+                    mVerificationId = verificationId;
+                    mResendToken = token;
+                    vStatus.setText(R.string.descript_error_verification_3);
+                    circleProgressBar.setVisibility(circleProgressBar.INVISIBLE);
+                    finish.getBackground().setAlpha(255);
+                    verify.getBackground().setAlpha(100);
+                    cancel.getBackground().setAlpha(100);
 
-                finish.setEnabled(true);
-                verify.setEnabled(false);
-                cancel.setEnabled(false);
+                    finish.setEnabled(true);
+                    verify.setEnabled(false);
+                    cancel.setEnabled(false);
 
-                // ...
-            }
+                    // ...
+                }
 
-        };
+            };
+    }
 
+
+
+    private void ToastMessage(String message) {
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
     }
 
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            FirebaseUser user = task.getResult().getUser();
-                            Toast.makeText(SweeperVerificationActivity.this,"successful",Toast.LENGTH_SHORT).show();
+        mAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    FirebaseUser user = task.getResult().getUser();
+                    mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        String id;
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                id = mAuth.getUid();
 
-                            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
 
-                                String id;
 
-                                     @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    id = mAuth.getUid();
-                                    DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("sweeper");
-                                    Sweeper sweeper = new Sweeper(name, email, nid, ward, phone, address,type,sweeper_id,"A1");
-                                    myRef.child(id).setValue(sweeper);
-                                    Toast.makeText(SweeperVerificationActivity.this,"Succesfully Registered", Toast.LENGTH_LONG).show();
+                                DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("sweeper");
+                                Sweeper sweeper = new Sweeper(name, email, nid, ward, phone, address, type, sweeper_id, areacode);
+                                myRef.child(id).setValue(sweeper);
 
-                                } else {
-                                Toast.makeText(SweeperVerificationActivity.this, "error", Toast.LENGTH_LONG).show();
-                                }
+
+
+                                DatabaseReference hopperRef = FirebaseDatabase.getInstance().getReference("Resource").child("Sweepers").child(sweeper_id);
+                                SweeperCode sweeperCode =new SweeperCode(sweeper_id,true,id,areacode);
+                                hopperRef.setValue(sweeperCode);
+
+                                Intent intent = new Intent(SweeperVerificationActivity.this,SweeperHomeActivity.class);
+                                startActivity(intent);
+                                finish();
+                                ToastMessage("Succeessful ");
+
                             }
-
+                            else{
+                                ToastMessage(" failed");
+                            }
+                        }
                     });
 
 
-                            /*Sweeper must be accepted by Admin so we cant allow it to activity...new activity is needed*/
-                            /*for simplicity I dont need it now*/
-                            Intent intent = new Intent(SweeperVerificationActivity.this,SweeperHomeActivity.class);
-                            startActivity(intent);
-                            finish();
-                            Toast.makeText(SweeperVerificationActivity.this,"successful",Toast.LENGTH_LONG).show();
-                            // ...
-                        } else {
-                            // Sign in failed, display a message and update the UI
-
-                            if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                                // The verification code entered was invalid
-                                vStatus.setText(R.string.descript_error_verification_2);
-                            }
-                        }
+                }
+                else{
+                    if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                        // The verification code entered was invalid
+                        ToastMessage("failure");
                     }
-                });
+                }
+            }
+        });
     }
 
 }

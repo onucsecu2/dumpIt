@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,94 +28,76 @@ import java.util.List;
  * Created by onu on 7/27/18.
  */
 
-public class sweeper_complaints_list extends Fragment {
+public class admin_area_list extends Fragment {
     private RecyclerView mRecyclerView;
-    sweeper_complaints_list_recycleview adapter1;
-    List<Complaint> complaintList1;
+    admin_area_recycleview adapter1;
+    List<AreaCode> areaList1;
     private DatabaseReference myRef;
-    private DatabaseReference myRef1;
     private LinearLayoutManager layoutManager;
     private FirebaseAuth mAuth;
     private String uid;
-    private Button sweeper_show_area ;
+    private Button admin_add_new_area ;
     private String area_code;
+    private ProgressBar mProgressView;
     int i=0;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.sweeper_complaints_list, container, false);
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.comp_recycleview_sweeper);
-        sweeper_show_area=(Button)rootView.findViewById(R.id.sweeper_show_area);
-        //layoutManager = (LinearLayoutManager) rootView.findViewById(R.id.comp_recycleview_informer_linearLayout);
+        View rootView = inflater.inflate(R.layout.admin_area_list, container, false);
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.area_recycleview_admin);
+        admin_add_new_area=(Button)rootView.findViewById(R.id.admin_add_area);
+        mProgressView = (ProgressBar)rootView.findViewById(R.id.arealist_progress);
+
+
+
+
+
         layoutManager = new LinearLayoutManager(rootView.getContext());
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(),
                 layoutManager.getOrientation());
         mRecyclerView.addItemDecoration(dividerItemDecoration);
         mAuth= FirebaseAuth.getInstance();
-        complaintList1= new ArrayList<>();
+        areaList1= new ArrayList<>();
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
 
-        sweeper_show_area.setOnClickListener(new View.OnClickListener() {
+
+        //Admin can add new area via this button
+
+
+
+        admin_add_new_area.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(getActivity(),MapsSweeperActivity.class);
+                Intent intent= new Intent(getActivity(),AdminAddMapsActivity.class);
                 startActivity(intent);
                 getActivity().finish();
             }
         });
-
         //complaintList.add()
-        uid=mAuth.getUid();
-
-        myRef1 = FirebaseDatabase.getInstance().getReference("sweeper").child(uid);
-        myRef1.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Sweeper sweeper=dataSnapshot.getValue(Sweeper.class);
-                String choda =sweeper.getAreacode();
-                area_code=choda;
-                //ToastMessage(area_code);
-                i++;
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                ToastMessage("something is wrong");
-            }
-        });
-
-       // ToastMessage(String.valueOf(i));
-        //ToastMessage(achoda.get(1));
-
-        myRef = FirebaseDatabase.getInstance().getReference("Complaints");
+        myRef = FirebaseDatabase.getInstance().getReference("Area");
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                for(DataSnapshot userID : dataSnapshot.getChildren()) {
-                    for (DataSnapshot locID : userID.getChildren()) {
-                        Complaint complaint = locID.getValue(Complaint.class);
-                        String areacode_complaint = complaint.getAreacode();
-                        String complaint_status = complaint.getStatus();
-                         if(area_code.equals(areacode_complaint)) {
-                             if(complaint_status.equals("Pending")) {
-                                 complaintList1.add(complaint);
-                             }
-                        }
-                    }
+                mProgressView.setVisibility(View.VISIBLE);
+                for(DataSnapshot areacode : dataSnapshot.getChildren()) {
+                        AreaCode areaCode = areacode.getValue(AreaCode.class);
+                        areaList1.add(areaCode);
+                    mProgressView.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                ToastMessage("complaints load error");
+                ToastMessage("Area load error");
             }
         });
-        adapter1 = new sweeper_complaints_list_recycleview(rootView.getContext(),complaintList1);
-        //adapter1.notifyDataSetChanged();
+
+        adapter1 = new admin_area_recycleview(rootView.getContext(),areaList1);
         mRecyclerView.setAdapter(adapter1);
+
+        adapter1.notifyDataSetChanged();
 
         return rootView;
     }
@@ -122,6 +105,9 @@ public class sweeper_complaints_list extends Fragment {
     private void ToastMessage(String message) {
             Toast.makeText(getContext(),message,Toast.LENGTH_SHORT).show();
     }
+
+
+
 
 
 }

@@ -24,12 +24,12 @@ import java.util.List;
  * Created by onu on 8/24/18.
  */
 
-public class sweeper_complaints_response_list_recycleview extends RecyclerView.Adapter<sweeper_complaints_response_list_recycleview.complaintsviewHolder> {
+public class admin_complaints_response_list_recycleview extends RecyclerView.Adapter<admin_complaints_response_list_recycleview.complaintsviewHolder> {
 
     private Context context;
     private List<Complaint>complaintList;
 
-    public sweeper_complaints_response_list_recycleview(Context context, List<Complaint> complaintList) {
+    public admin_complaints_response_list_recycleview(Context context, List<Complaint> complaintList) {
         this.context = context;
         this.complaintList = complaintList;
     }
@@ -38,7 +38,7 @@ public class sweeper_complaints_response_list_recycleview extends RecyclerView.A
     public complaintsviewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //return null;
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view =inflater.inflate(R.layout.complaints_card,null);
+        View view =inflater.inflate(R.layout.admin_complaints_card,null);
         return  new complaintsviewHolder(view);
     }
 
@@ -71,28 +71,12 @@ public class sweeper_complaints_response_list_recycleview extends RecyclerView.A
             Glide.with( context)
                 .using(new FirebaseImageLoader())
                 .load(mStorageReference)
-                .into(holder.comp_img);
-
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(context, ResponseSweeper.class);
-                Complaint comp=complaintList.get(position);
-                intent.putExtra("uid", comp.getUid());
-                intent.putExtra("type", comp.getType());
-                intent.putExtra("id", comp.getId());
-                intent.putExtra("time", comp.getDate());
-                intent.putExtra("status", comp.getStatus());
-                intent.putExtra("lat", comp.getLatitude());
-                intent.putExtra("lon", comp.getLongitude());
-                intent.putExtra("val", comp.getVal());
-                intent.putExtra("areacode", comp.getAreacode());
-                intent.putExtra("response_date", comp.getRspns());
-                context.startActivity(intent);
-            }
-        });
+                .into(holder.comp_img1);
+            mStorageReference=storageReference.child("Completed").child(complaint.getId());
+            Glide.with( context)
+                    .using(new FirebaseImageLoader())
+                    .load(mStorageReference)
+                    .into(holder.comp_img2);
 
     }
 
@@ -104,35 +88,20 @@ public class sweeper_complaints_response_list_recycleview extends RecyclerView.A
 
     class complaintsviewHolder extends RecyclerView.ViewHolder{
 
-        ImageView comp_img;
+        ImageView comp_img1,comp_img2;
         TextView comp_status,comp_id,comp_time,comp_rspns,comp_type;
 
         public complaintsviewHolder(View itemView) {
             super(itemView);
 
-            comp_img=itemView.findViewById(R.id.comp_img);
+            comp_img1=itemView.findViewById(R.id.comp_img1);
+            comp_img2=itemView.findViewById(R.id.comp_img2);
             comp_status=itemView.findViewById(R.id.comp_status);
             comp_id=itemView.findViewById(R.id.comp_id);
             comp_time=itemView.findViewById(R.id.comp_time);
             comp_type=itemView.findViewById(R.id.comp_type);
             comp_rspns=itemView.findViewById(R.id.comp_respns);
-           // parentLayout=itemView.findViewById(R.id.parent_layout);
 
-            /*itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, ResponseSweeper.class);
-                   // Complaint comp=complaintList.get(1);
-                    intent.putExtra("uid", comp.getUid());
-                    intent.putExtra("type", comp.getType());
-                    intent.putExtra("id", comp.getId());
-                    intent.putExtra("time", comp.getDate());
-                    intent.putExtra("response", comp.getRspns());
-                    intent.putExtra("lat", comp.getLatitude());
-                    intent.putExtra("lon", comp.getLongitude());
-                    context.startActivity(intent);
-                }
-            });*/
 
         }
     }

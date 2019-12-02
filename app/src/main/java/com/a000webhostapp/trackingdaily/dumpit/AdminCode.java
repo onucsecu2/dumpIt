@@ -6,52 +6,26 @@ package com.a000webhostapp.trackingdaily.dumpit;
  * Created by onu on 8/15/18.
  */
 
-public class Admin {
-    String email;
-    String name;
-    String nid;
-    String ward;
-    String mobile;
-    String address;
-    String type;
-    public Admin(){
+public class AdminCode {
+    String str,uid;
+    boolean bool;
+    public AdminCode(){
 
     }
-    public Admin(String name, String email, String nid, String ward, String mobile, String address, String type){
-        this.email=email;
-        this.name=name;
-        this.nid=nid;
-        this.ward=ward;
-        this.mobile=mobile;
-        this.address=address;
-        this.type=type;
+
+    public AdminCode(String str, boolean bool,String uid) {
+        this.str = str;
+        this.uid = uid;
+        this.bool = bool;
     }
 
-    public String getEmail() {
-        return email;
+    public String getStr() {
+        return str;
     }
-
-    public String getName() {
-        return name;
+    public String getUid() {
+        return uid;
     }
-
-    public String getNid() {
-        return nid;
-    }
-
-    public String getWard() {
-        return ward;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public String getType() {
-        return type;
+    public boolean isBool() {
+        return bool;
     }
 }

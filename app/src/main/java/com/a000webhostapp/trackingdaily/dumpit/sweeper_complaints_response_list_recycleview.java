@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -25,12 +24,12 @@ import java.util.List;
  * Created by onu on 8/24/18.
  */
 
-public class sweeper_complaints_list_recycleview extends RecyclerView.Adapter<sweeper_complaints_list_recycleview.complaintsviewHolder> {
+public class sweeper_complaints_response_list_recycleview extends RecyclerView.Adapter<sweeper_complaints_response_list_recycleview.complaintsviewHolder> {
 
     private Context context;
     private List<Complaint>complaintList;
 
-    public sweeper_complaints_list_recycleview(Context context, List<Complaint> complaintList) {
+    public sweeper_complaints_response_list_recycleview(Context context, List<Complaint> complaintList) {
         this.context = context;
         this.complaintList = complaintList;
     }
@@ -68,7 +67,7 @@ public class sweeper_complaints_list_recycleview extends RecyclerView.Adapter<sw
             holder.comp_time.setText(date);
             holder.comp_type.setText(complaint.getType());
             StorageReference storageReference= FirebaseStorage.getInstance().getReference();;
-            StorageReference mStorageReference=storageReference.child(complaint.getUid()).child(complaint.getId());
+            StorageReference mStorageReference=storageReference.child("Completed").child(complaint.getId());
             Glide.with( context)
                 .using(new FirebaseImageLoader())
                 .load(mStorageReference)

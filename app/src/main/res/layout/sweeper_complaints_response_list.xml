@@ -9,18 +9,8 @@
     android:gravity="top"
     android:padding="10dp">
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/sweeper_show_area"
-            android:text="Show In map"
-            android:textStyle="bold"
-            android:background="@color/button"
-            android:textColor="@color/txt"
-            android:padding="2dp"
-            android:textSize="10sp"/>
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/comp_recycleview_sweeper"
+            android:id="@+id/comp_response_recycleview_sweeper"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

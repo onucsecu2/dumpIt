@@ -4,10 +4,15 @@
     <color name="button_1">#066001</color>
     <color name="select_2">#ff7b00</color>
     <color name="background">#3d4457</color>
+    <color name="background_1">#f0757c8f</color>
     <color name="button">#262c38</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="done">#27f72e</color>
     <color name="txt">#ffffff</color>
     <color name="black">#020101</color>
-    <color name="red">#d40000</color>
+    <color name="red">#dc2020</color>
+    <color name="white">#ffffff</color>
+    <color name="main_color">#ff7b00</color>
+    <color name="secondary_color">#27f72e</color>
 </resources>

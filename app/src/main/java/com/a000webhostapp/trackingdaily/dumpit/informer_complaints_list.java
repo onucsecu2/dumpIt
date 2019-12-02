@@ -9,7 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.ProgressBar;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -32,12 +32,13 @@ public class informer_complaints_list extends Fragment {
     private DatabaseReference myRef;
     private LinearLayoutManager layoutManager;
     private FirebaseAuth mAuth;
+    private ProgressBar mProgressView;
     private String uid;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.informer_complaints_list, container, false);
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.comp_recycleview_informer);
-        //layoutManager = (LinearLayoutManager) rootView.findViewById(R.id.comp_recycleview_informer_linearLayout);
+
         layoutManager = new LinearLayoutManager(rootView.getContext());
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(),
@@ -46,6 +47,7 @@ public class informer_complaints_list extends Fragment {
         mAuth= FirebaseAuth.getInstance();
         complaintList= new ArrayList<>();
         mRecyclerView.setHasFixedSize(true);
+        mProgressView = (ProgressBar)rootView.findViewById(R.id.arealist_progress);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
 
         //complaintList.add()
@@ -55,12 +57,12 @@ public class informer_complaints_list extends Fragment {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
+                mProgressView.setVisibility(View.VISIBLE);
                 for(DataSnapshot locID : dataSnapshot.getChildren()) {
 
                         Complaint complaint = locID.getValue(Complaint.class);
                         complaintList.add(complaint);
-
+                    mProgressView.setVisibility(View.GONE);
                 }
             }
 
@@ -70,7 +72,11 @@ public class informer_complaints_list extends Fragment {
             }
         });
         adapter = new informer_complaints_list_recycleview(rootView.getContext(),complaintList);
+
         mRecyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+      /*  notifyItemRangeChanged(getAdapterPosition(),mDataSet.size());
+        notifyItemRemoved(getAdapterPosition());*/
         return rootView;
     }
 

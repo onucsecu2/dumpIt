@@ -18,8 +18,10 @@ import android.view.MenuItem;
 import android.view.Window;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-public class SweeperHomeActivity extends AppCompatActivity
+public class AdminHomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     /**
@@ -43,24 +45,28 @@ public class SweeperHomeActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_sweeper_home);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_sweeper);
+        setContentView(R.layout.activity_admin_home);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_admin);
         setSupportActionBar(toolbar);
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-        mViewPager = (ViewPager) findViewById(R.id.container_sweeper);
+        mViewPager = (ViewPager) findViewById(R.id.container_admin);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-        mAuth=FirebaseAuth.getInstance();;
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs_sweeper);
+        mAuth=FirebaseAuth.getInstance();
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs_admin);
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.sweeper_drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.admin_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.sweeper_nav_view);
+        /*
+        just created it
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("CHistory");
+        CHistory cHistory= new CHistory();
+        myRef.push().setValue(cHistory);*/
+        NavigationView navigationView = (NavigationView) findViewById(R.id.admin_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -80,13 +86,13 @@ public class SweeperHomeActivity extends AppCompatActivity
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position){
                 case 0:
-                    sweeper_complaints_list tab1 =new sweeper_complaints_list();
+                    admin_area_list tab1 =new admin_area_list();
                     return tab1;
                 case 1:
-                    sweeper_complaints_response_list tab2 = new sweeper_complaints_response_list();
+                    admin_complaints_response_list tab2 = new admin_complaints_response_list();
                     return tab2;
                 case 2:
-                    sweeper_complaints_list tab3 = new sweeper_complaints_list();
+                    admin_new_sweeper_admin tab3= new admin_new_sweeper_admin();
                     return tab3;
                 default:
                     return null;
@@ -95,14 +101,14 @@ public class SweeperHomeActivity extends AppCompatActivity
 
         @Override
         public int getCount() {
-            // Show 2 total pages.
+            // Show 3 total pages.
             return 3;
         }
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.sweeper_drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.admin_drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -127,7 +133,7 @@ public class SweeperHomeActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
             mAuth.signOut();
-            Intent intent = new Intent(SweeperHomeActivity.this,MainActivity.class);
+            Intent intent = new Intent(AdminHomeActivity.this,MainActivity.class);
             startActivity(intent);
             finish();
         }
@@ -151,7 +157,7 @@ public class SweeperHomeActivity extends AppCompatActivity
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.sweeper_drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.admin_drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
