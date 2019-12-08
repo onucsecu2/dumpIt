@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.gao.jiefly:abilitychartlibrary:1.0.1@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/abilitychartlibrary-1.0.1.aar/6fa3f417ae63e6afbe3fce2b02513ad8/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/abilitychartlibrary-1.0.1.aar/6fa3f417ae63e6afbe3fce2b02513ad8/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.gao.jiefly/abilitychartlibrary/1.0.1/6660a3bdfc2a965daaa7ce21d62a9f8c3f0e83fa/abilitychartlibrary-1.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,118 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="0dp">
+        <LinearLayout
+            android:id="@+id/info_process"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/background"
+            android:visibility="gone">
+                <com.github.jlmd.animatedcircleloadingview.AnimatedCircleLoadingView
+                    android:id="@+id/circle_loading_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="15dp"
+                    android:background="@color/background"
+                    android:layout_centerInParent="true"
+                    app:animCircleLoadingView_mainColor="@color/secondary_color"
+                    app:animCircleLoadingView_secondaryColor="@color/main_color"
+                    app:animCircleLoadingView_textColor="@android:color/white"/>
+                <Button
+                    android:id="@+id/ok"
+                    android:padding="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/next"
+                    android:layout_gravity="center"
+                    android:background="@color/secondary_color"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/getinfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp">
+                <RadioGroup
+
+                    android:id="@+id/radio_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/new_type"
+                            android:textColor="@color/black"/>
+                        <RadioButton android:id="@+id/radio_sweeper"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/new_sweeper"
+                            android:textColor="@color/black" />
+                        <RadioButton android:id="@+id/radio_admin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/new_admin"
+                            android:textColor="@color/black" />
+                </RadioGroup>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:paddingBottom="20dp">
+                        <TextView
+                            android:paddingRight="50dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:textSize="15sp"
+                            android:text="@string/code" />
+                        <EditText
+                            android:id="@+id/code"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/code_extend"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:paddingBottom="20dp">
+                        <TextView
+                            android:paddingRight="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:textSize="15sp"
+                            android:text="@string/areacode" />
+                        <EditText
+                            android:id="@+id/areacode"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black" />
+                </LinearLayout>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/admin_done"
+                    android:text="@string/next"
+                    android:textStyle="bold"
+                    android:background="@color/button"
+                    android:textColor="@color/txt"
+                    android:padding="2dp"
+                    android:textSize="10sp"/>
+        </LinearLayout>
+</LinearLayout>

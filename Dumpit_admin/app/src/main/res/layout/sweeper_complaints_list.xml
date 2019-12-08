@@ -1,0 +1,39 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/SweeperLayout_complaint"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="top"
+    android:padding="10dp">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/sweeper_show_area"
+            android:text="Show In map"
+            android:textStyle="bold"
+            android:background="@color/button"
+            android:textColor="@color/txt"
+            android:padding="2dp"
+            android:textSize="10sp"/>
+        <ProgressBar
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/sweeper_progress"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:visibility="visible" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/comp_recycleview_sweeper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="5dp"
+            android:layout_margin="5dp">
+
+        </android.support.v7.widget.RecyclerView>
+</LinearLayout>

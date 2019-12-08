@@ -1,0 +1,92 @@
+<resources>
+    <string name="app_name">DumpIt</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">ই-মেইল দিন</string>
+    <string name="next">সম্পন্ন করুন</string>
+    <string name="capture">ছবি তুলুন</string>
+    <string name="back">বাদ দিন</string>
+    <string name="prompt_name">আপনার নাম</string>
+    <string name="prompt_nid">আপনার জাতীয় পরিচয়পত্র নম্বর</string>
+    <string name="prompt_sweeper_ID">আপনার সেবক নম্বর</string>
+    <string name="prompt_admin_ID">আপনার নিরীক্ষা নম্বর</string>
+    <string name="prompt_admin_pass">গোপন আ্যডমিন পাস</string>
+    <string name="prompt_phone">মোবাইল নম্বর</string>
+    <string name="prompt_addr">যোগাযোগের ঠিকানা</string>
+    <string name="prompt_thana">উপজেলা/থানা</string>
+    <string name="prompt_zilla">জেলা</string>
+    <string name="prompt_post">ডাকঘর</string>
+    <string name="areacode">এলাকা কোড</string>
+    <string name="code">কোড</string>
+    <string name="new_type">টাইপ</string>
+    <string name="prompt_ward">ওয়ার্ড/ইউনিয়ন</string>
+    <string name="prompt_password">পাসওয়ার্ড দিন</string>
+    <string name="prompt_password_re">আবার পাসওয়ার্ড দিন</string>
+    <string name="action_sign_in">প্রবেশ করুন</string>
+    <string name="action_sign_up">রেজিস্ট্রেশন করুন</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="action_submit">সাবমিট</string>
+    <string name="action_next">পরবর্তী ধাপ</string>
+    <string name="action_verify">ভেরিফাই করুন</string>
+    <string name="action_cancel">বাতিল করুন</string>
+    <string name="action_finish"> সমাপ্ত </string>
+    <string name="descript_verify">আপনার প্রদত্ত ফোন নম্বরটি ভেরিফিকেশন করা হবে এবং ভেরিফাই করে আপনার রেজিস্ট্রেশন সম্পুর্ন করুন অথবা বাতিল করুন</string>
+    <string name="descript_verify_1">আপনার আইডি ভেরিফিকেশন করা হবে।ভেরিফাই করে পরবর্তী ধাপে যান </string>
+    <string name="descript_verify_2"> অপেক্ষা করুন </string>
+    <string name="descript_error_verification_1">আপনার প্রদত্ত ফোন নম্বরটি ভেরিফিকেশন করা হচ্ছে। কিছুক্ষনের মধ্যে মেসেজের মাধ্যমে একটি ভেরিফিকেশন কোড পাঠানো হবে অপেক্ষা করুন</string>
+    <string name="descript_error_verification_2">ভেরিফিকেশন ফেইলড</string>
+    <string name="descript_error_verification_3">ভেরিফিকেশন কোডটি লিখুন</string>
+    <string name="descript_error_verification_4">কোথাও কিছু সমস্যা হচ্ছে</string>
+    <string name="descript_error_verification_5">আপনার প্রদত্ত নিরীক্ষক নং বৈধ নয়</string>
+    <string name="descript_error_verification_6">আপনার প্রদত্ত সেবক নং বৈধ নয়</string>
+    <string name="descript_error_verification_7">sarcasm</string>
+    <string name="gps">অামার লোকেশন</string>
+    <string name="gps_1">অামি এখানেই অাছি</string>
+    <string name="gps2">অাপনি উল্লেখিত ঘটনা থেকে দুরে অবস্থান করছেন</string>
+
+
+    <string name="error_invalid_email">এ ই-মেইলটি গ্রহণযোগ্য নয়</string>
+    <string name="error_invalid_password">পাসওয়ার্ডটি খুবই ছোট</string>
+    <string name="error_incorrect_password">পাসওয়ার্ডটি ভুল</string>
+    <string name="error_mismatch_password">পাসওয়ার্ডটি মিলে নি </string>
+    <string name="error_field_required">খালিঘরটি পুরণ করতে হবে</string>
+    <string name="informer">আমি তথ্যদাতা</string>
+    <string name="sweeper">আমি সেবক</string>
+    <string name="admin">আমি নিরীক্ষক</string>
+    <string name="or">অথবা</string>
+    <string name="reqLocShare">GPS / লোকেশন শেয়ারিং On করুন</string>
+    <string name="reqNet">Data Connection কিংবা Wifi On করুন এবং ইন্টারনেট সংযোগ নিশ্চিত করুন</string>
+
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_activity_informer">Informer Home</string>
+    <string name="informer_tab_text_1">আমার প্রদত্ত তথ্যসমুহ</string>
+    <string name="sweeper_tab_text_1">আমার এলাকা</string>
+    <string name="informer_tab_text_2">তথ্য দিন</string>
+    <string name="sweeper_tab_text_2">প্রতিক্রিয়াসমুহ</string>
+    <string name="sweeper_tab_text_3">ডাম্পিং করা হোক</string>
+    <string name="admin_tab_text_1">এলাকা নির্ধারন</string>
+    <string name="admin_tab_text_2">প্রতিক্রিয়াসমুহ</string>
+    <string name="admin_tab_text_3">নতুন সেবক/অ্যাডমিন</string>
+    <string name="action_logout">লগআউট</string>
+    <string name="action_settings">সেটিংস</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_informer_home">তথ্যদাতা</string>
+    <string name="new_sweeper">নতুন সেবক</string>
+    <string name="new_admin">নতুন অ্যাডমিন</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="select_type_complaints">আপনি নিম্মোক্ত কোন বিষয় সম্পর্কে অবহিত করতে চান ? </string>
+    <string-array name="complaint_type">
+        <item>None</item>
+        <item>ম্যানহোল ঢাকনা নেই/মেরামত</item>
+        <item>ড্রেন জ্যাম</item>
+        <item>ময়লার স্তুপ</item>
+        <item>ডাস্টবিন/বিন উপচিয়ে পড়ছে</item>
+        <item>বিন পরিপুর্ণ</item>
+    </string-array>
+    <string name="title_activity_maps">ম্যাপ</string>
+</resources>
