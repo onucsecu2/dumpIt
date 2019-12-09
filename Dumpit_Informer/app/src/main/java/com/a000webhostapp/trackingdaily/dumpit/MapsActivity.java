@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -45,7 +46,7 @@ import java.util.List;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-
+    private boolean GPS_service=false;
     private  Marker marker=null;
     private Marker mMarker;
     private  GPSHelper gpsHelper;
@@ -53,6 +54,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private double longitude, latitude;
     private Button next;
     private ImageView back;
+    private ImageView refresh;
 
 
     private int tog;
@@ -80,6 +82,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
         next = (Button) findViewById(R.id.next_btn);
         back = (ImageView) findViewById(R.id.back_btn);
+        refresh = (ImageView) findViewById(R.id.refresh_btn);
         type_1=(ImageView) findViewById(R.id.map_type_sat);
         type_2=(ImageView) findViewById(R.id.map_type_terrain);
 
@@ -150,21 +153,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 startActivity(intent);
             }
         });
-
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onRestart();
+            }
+        });
         LocationManager lm = (LocationManager)getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
-        boolean gps_enabled = false;
-        gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
 
-        if(!gps_enabled){
+
+
+
+        if(!checkGPS(lm)){
             toastMessage(getResources().getString(R.string.reqLocShare));
-            Intent gpsOptionsIntent = new Intent(
-                    Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            startActivity(gpsOptionsIntent);
+            enableGPS();
         }
-        onRestart();
-        //toastMessage("stepped");
+
         getLocationCurrent();
+
+
+
+
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
@@ -174,6 +185,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+    private void enableGPS(){
+            Intent gpsOptionsIntent = new Intent(
+                    Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(gpsOptionsIntent);
+
+    }
+
+
+    private boolean checkGPS(LocationManager lm ) {
+        return lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+    }
 
     /**
      * Manipulates the map once available.
@@ -208,8 +231,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
        Marker mark= mMap.addMarker(new MarkerOptions()
                     .position(latLng)
-                    .title(String.valueOf(R.string.gps))
-                    .snippet(String.valueOf(R.string.gps_1))
+                    .title(getString(R.string.gps))
+                    .snippet(getString(R.string.gps_1))
                     .rotation((float) -15.0)
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
 
@@ -392,44 +415,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private void getLocationCurrent(){
         gpsHelper= new GPSHelper(getApplicationContext());
+
         mLocation = gpsHelper.getLocation();
+
         try {
             latitude = mLocation.getLatitude();
             longitude = mLocation.getLongitude();
         }catch (Exception e) {
-            toastMessage(getResources().getString(R.string.reqLocShare));
+//            toastMessage(getResources().getString(R.string.reqLocShare));
            // toastMessage(e.getMessage());
         }
     }
     public void onRestart() {
-
         super.onRestart();
-       // toastMessage("restart");
-        LocationManager lm = (LocationManager)getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
-        boolean gps_enabled = false;
-        gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        if(gps_enabled) {
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            getLocationCurrent();
-
-
-            //mLoading.setVisibility(View.GONE);
-            //circleProgressBar.setVisibility(circleProgressBar.GONE);
-                SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                        .findFragmentById(R.id.map);
-                mapFragment.getMapAsync(this);
-
-        }
-        else{
-            toastMessage(getResources().getString(R.string.reqLocShare));
-            Intent gpsOptionsIntent = new Intent(
-                    Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            startActivity(gpsOptionsIntent);
-        }
     }
     @Override
     public void onResume() {

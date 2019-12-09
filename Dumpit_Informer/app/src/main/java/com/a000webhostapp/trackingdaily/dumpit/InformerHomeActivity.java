@@ -136,7 +136,7 @@ public class InformerHomeActivity extends AppCompatActivity
                     .build();
             mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
             mGoogleSignInClient.signOut();
-            Intent intent = new Intent(InformerHomeActivity.this,MainActivity.class);
+            Intent intent = new Intent(InformerHomeActivity.this,LoginActivity.class);
             startActivity(intent);
             finish();
         }

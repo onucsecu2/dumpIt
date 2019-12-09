@@ -1,6 +1,7 @@
 package com.a000webhostapp.trackingdaily.dumpit;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -49,7 +51,9 @@ public class informer_complaints_list extends Fragment {
         mRecyclerView.setHasFixedSize(true);
         mProgressView = (ProgressBar)rootView.findViewById(R.id.arealist_progress);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
+        adapter = new informer_complaints_list_recycleview(rootView.getContext(),complaintList);
 
+        mRecyclerView.setAdapter(adapter);
         //complaintList.add()
         uid=mAuth.getUid();
         myRef = FirebaseDatabase.getInstance().getReference("Complaints").child(uid);
@@ -62,8 +66,9 @@ public class informer_complaints_list extends Fragment {
 
                         Complaint complaint = locID.getValue(Complaint.class);
                         complaintList.add(complaint);
-                    mProgressView.setVisibility(View.GONE);
+                        adapter.notifyDataSetChanged();
                 }
+                mProgressView.setVisibility(View.GONE);
             }
 
             @Override
@@ -71,14 +76,15 @@ public class informer_complaints_list extends Fragment {
 
             }
         });
-        adapter = new informer_complaints_list_recycleview(rootView.getContext(),complaintList);
 
-        mRecyclerView.setAdapter(adapter);
+
         adapter.notifyDataSetChanged();
       /*  notifyItemRangeChanged(getAdapterPosition(),mDataSet.size());
         notifyItemRemoved(getAdapterPosition());*/
         return rootView;
     }
 
-
+    private void toastMessage(String message){
+        Toast.makeText(getContext(),message,Toast.LENGTH_LONG).show();
+    }
 }

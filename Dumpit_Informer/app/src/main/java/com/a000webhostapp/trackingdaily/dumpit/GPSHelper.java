@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.widget.Toast;
 
 /**
  * Created by onu on 8/18/18.
@@ -58,6 +59,7 @@ public class GPSHelper extends Service implements LocationListener{
                         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 10000,10,this);
                         if(locationManager!=null){
                             location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
                         }
 
                     }
@@ -66,9 +68,15 @@ public class GPSHelper extends Service implements LocationListener{
             }
 
         }catch(Exception ex){
-
+            toastMessage(ex.getMessage());
+        }
+        if(location==null){
+            getLocation();
         }
         return  location;
+    }
+    private void toastMessage(String message){
+//        Toast.makeText(this,message,Toast.LENGTH_LONG).show();
     }
     @Nullable
     @Override

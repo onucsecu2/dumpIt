@@ -24,10 +24,26 @@
         android:layout_marginTop="10dp">
         <ImageView
             android:id="@+id/back_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/cancel"
+            android:layout_width="45dp"
+            android:layout_height="35dp"
+            android:src="@drawable/back"
             android:layout_gravity="left"/>
+    </LinearLayout>
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="right"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp">
+        <ImageView
+            android:id="@+id/refresh_btn"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/refresh"
+
+            android:layout_gravity="right"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,6 +59,7 @@
             android:background="@color/button"
             android:text="@string/next"
             android:textColor="@color/txt" />
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -63,6 +80,7 @@
             android:layout_height="35dp"
             android:layout_gravity="center"
             android:src="@drawable/terrain_on"/>
+
     </LinearLayout>
 
     <LinearLayout

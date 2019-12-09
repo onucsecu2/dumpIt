@@ -134,7 +134,6 @@ public class informer_complaints_list_recycleview extends RecyclerView.Adapter<i
             comp_rspns=itemView.findViewById(R.id.comp_respns);
             del=itemView.findViewById(R.id.del);
             claim =itemView.findViewById(R.id.claim);
-
         }
 
     }
