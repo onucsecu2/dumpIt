@@ -59,20 +59,23 @@ public class AdminVerificationActivity extends AppCompatActivity {
     private String address;
     private String type;
     private String admin_str;
+    private boolean profile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_admin_verification);
         Intent recievedIntent= getIntent();
+        profile=recievedIntent.getBooleanExtra("profile",false);
         name = recievedIntent.getStringExtra("name");
         type="admin";
         address = recievedIntent.getStringExtra("address");
         nid = recievedIntent.getStringExtra("nid");
-        phone =  phone = "+880 1727-946938";//recievedIntent.getStringExtra("mobile");
+        phone = "+8801521227381";//recievedIntent.getStringExtra("mobile");
         ward = recievedIntent.getStringExtra("ward");
         email = recievedIntent.getStringExtra("email");
-        password = recievedIntent.getStringExtra("password");
+        if(!profile)
+            password = recievedIntent.getStringExtra("password");
         admin_str = recievedIntent.getStringExtra("code");
 
         verify = (Button)findViewById(R.id.verifyButton);
@@ -110,8 +113,8 @@ public class AdminVerificationActivity extends AppCompatActivity {
                 verify.setEnabled(false);
                 cancel.setEnabled(false);
                 firebaseAuthSettings.setAutoRetrievedSmsCodeForPhoneNumber(phone, "123456");
-                Toast.makeText(AdminVerificationActivity.this,"Verified",Toast.LENGTH_SHORT).show();
                 PhoneAuthProvider.getInstance().verifyPhoneNumber(phone,120,TimeUnit.SECONDS,AdminVerificationActivity.this,mCallbacks);
+
             }
         });
 
@@ -120,14 +123,24 @@ public class AdminVerificationActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String verificationCode = verifyTxt.getText().toString();
                 PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, verificationCode);
-                signInWithPhoneAuthCredential(credential);
+                if(!profile)
+                    signInWithPhoneAuthCredential(credential);
+                else{
+                    saveProfile();
+                }
             }
         });
 
         mCallbacks =new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             @Override
             public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
+                if(profile){
+                    saveProfile();
+                }
+                else{
                     signInWithPhoneAuthCredential(phoneAuthCredential);
+                }
+
             }
 
             @Override
@@ -137,6 +150,7 @@ public class AdminVerificationActivity extends AppCompatActivity {
                 cancel.getBackground().setAlpha(255);
                 verify.setEnabled(true);
                 cancel.setEnabled(true);
+                toastMessage("jhamela");
                 circleProgressBar.setVisibility(circleProgressBar.GONE);
             }
 
@@ -165,6 +179,22 @@ public class AdminVerificationActivity extends AppCompatActivity {
 
         };
 
+    }
+
+    private void saveProfile() {
+        String id = mAuth.getUid();
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("admin");
+        Admin admin = new Admin(name, email, nid, ward, phone, address,type);
+        myRef.child(id).setValue(admin);
+        /*After finding the id slot as false this need to be true in the database*/
+        DatabaseReference hopperRef = FirebaseDatabase.getInstance().getReference("Resource").child("Admins").child(admin_str);
+        AdminCode adminCode =new AdminCode(admin_str,true,id);
+        hopperRef.setValue(adminCode);
+        toastMessage("updated ");
+
+        Intent intent = new Intent(AdminVerificationActivity.this,AdminHomeActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private void ToastMessage(String message) {
@@ -222,6 +252,9 @@ public class AdminVerificationActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+    private void toastMessage(String message){
+        Toast.makeText(this,message,Toast.LENGTH_LONG).show();
     }
 
 }

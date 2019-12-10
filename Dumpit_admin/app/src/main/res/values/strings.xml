@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DumpIt</string>
+    <string name="app_name">DumpIt-Admin</string>
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
@@ -32,7 +32,7 @@
     <string name="action_cancel">বাতিল করুন</string>
     <string name="action_finish"> সমাপ্ত </string>
     <string name="descript_verify">আপনার প্রদত্ত ফোন নম্বরটি ভেরিফিকেশন করা হবে এবং ভেরিফাই করে আপনার রেজিস্ট্রেশন সম্পুর্ন করুন অথবা বাতিল করুন</string>
-    <string name="descript_verify_1">আপনার আইডি ভেরিফিকেশন করা হবে।ভেরিফাই করে পরবর্তী ধাপে যান </string>
+    <string name="descript_verify_1">আপনার নিরীক্ষক আইডি দিন এরপর ভেরিফাই ক্লিক করে পরবর্তী ধাপে যান </string>
     <string name="descript_verify_2"> অপেক্ষা করুন </string>
     <string name="descript_error_verification_1">আপনার প্রদত্ত ফোন নম্বরটি ভেরিফিকেশন করা হচ্ছে। কিছুক্ষনের মধ্যে মেসেজের মাধ্যমে একটি ভেরিফিকেশন কোড পাঠানো হবে অপেক্ষা করুন</string>
     <string name="descript_error_verification_2">ভেরিফিকেশন ফেইলড</string>

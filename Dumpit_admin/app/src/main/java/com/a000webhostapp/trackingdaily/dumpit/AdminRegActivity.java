@@ -10,12 +10,16 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Logger;
 
 public class AdminRegActivity extends AppCompatActivity {
     private AutoCompleteTextView email;
+
+    private boolean profile=false;
     private EditText password;
     private EditText rpassword;
     private EditText name;
@@ -23,9 +27,11 @@ public class AdminRegActivity extends AppCompatActivity {
     private EditText ward;
     private EditText mobile;
     private EditText address;
+    private Button submit;
     private FirebaseAuth mAuth;
+    private  GoogleSignInAccount account;
     private FirebaseAuth.AuthStateListener mAuthlistener;
-    String email_str,password_str,ward_str,phone_str,nid_str,address_str,name_str;
+    String email_str,rpassword_str,password_str,ward_str,phone_str,nid_str,address_str,name_str;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,14 +45,23 @@ public class AdminRegActivity extends AppCompatActivity {
         ward=(EditText)findViewById(R.id.ward);
         mobile=(EditText)findViewById(R.id.phone);
         address=(EditText)findViewById(R.id.addr);
+        submit=(Button)findViewById(R.id.sign_up);
+        Intent recievedIntent= getIntent();
 
+        profile=recievedIntent.getBooleanExtra("profile",false);
 
-        Button submit=(Button)findViewById(R.id.sign_up);
+        if(profile){
+            password.setEnabled(false);
+            rpassword.setEnabled(false);
+        }
 
-        //FirebaseAuth.getInstance().signOut();
         mAuth=FirebaseAuth.getInstance();
-
-        FirebaseDatabase.getInstance().setLogLevel(Logger.Level.DEBUG);
+//        FirebaseDatabase.getInstance().setLogLevel(Logger.Level.DEBUG);
+        account= GoogleSignIn.getLastSignedInAccount(this);
+        if(account!=null) {
+            name.setText(account.getDisplayName());
+            email.setText(account.getEmail());
+        }
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +70,9 @@ public class AdminRegActivity extends AppCompatActivity {
 
 
                 email_str=email.getText().toString().trim();
-                password_str=password.getText().toString();
+                if(!profile) {
+                    password_str = password.getText().toString();
+                }
                 nid_str=nid.getText().toString();
                 //admin_str=admin_id.getText().toString();
                 name_str=name.getText().toString();
@@ -67,13 +84,14 @@ public class AdminRegActivity extends AppCompatActivity {
 
                    Intent intent = new Intent(AdminRegActivity.this, AdminIDActivity.class);
                     intent.putExtra("email", email_str);
-                    intent.putExtra("password", password_str);
+                    if(!profile)
+                        intent.putExtra("password", password_str);
                     intent.putExtra("name", name_str);
                     intent.putExtra("mobile", phone_str);
                     intent.putExtra("ward", ward_str);
                     intent.putExtra("address", address_str);
                     intent.putExtra("nid", nid_str);
-
+                    intent.putExtra("profile", profile);
                     startActivity(intent);
                 }
             }
@@ -97,8 +115,10 @@ public class AdminRegActivity extends AppCompatActivity {
 
         // Store values at the time of the login attempt.
         String email_str = email.getText().toString();
-        String password_str = password.getText().toString();
-        String rpassword_str = rpassword.getText().toString();
+        if(!profile) {
+            String password_str = password.getText().toString();
+            String rpassword_str = rpassword.getText().toString();
+        }
         String name_str = name.getText().toString();
         String nid_str = nid.getText().toString();
         String ward_str = ward.getText().toString();
@@ -106,27 +126,28 @@ public class AdminRegActivity extends AppCompatActivity {
         String address_str = address.getText().toString();
         boolean cancel = false;
         View focusView = null;
-
-        // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password_str) && !isPasswordValid(password_str)) {
-            password.setError(getString(R.string.error_invalid_password));
-            focusView = password;
-            cancel = true;
-        }
-        if(!password_str.equals(rpassword_str)){
-            password.setError(getString(R.string.error_mismatch_password));
-            focusView = password;
-            cancel = true;
-        }
-        // Check for a valid email address.
-        if (TextUtils.isEmpty(email_str)) {
-            email.setError(getString(R.string.error_field_required));
-            focusView = email;
-            cancel = true;
-        } else if (!isEmailValid(email_str)) {
-            email.setError(getString(R.string.error_invalid_email));
-            focusView = email;
-            cancel = true;
+        if(!profile) {
+            // Check for a valid password, if the user entered one.
+            if (!TextUtils.isEmpty(password_str) && !isPasswordValid(password_str)) {
+                password.setError(getString(R.string.error_invalid_password));
+                focusView = password;
+                cancel = true;
+            }
+            if (!password_str.equals(rpassword_str)) {
+                password.setError(getString(R.string.error_mismatch_password));
+                focusView = password;
+                cancel = true;
+            }
+            // Check for a valid email address.
+            if (TextUtils.isEmpty(email_str)) {
+                email.setError(getString(R.string.error_field_required));
+                focusView = email;
+                cancel = true;
+            } else if (!isEmailValid(email_str)) {
+                email.setError(getString(R.string.error_invalid_email));
+                focusView = email;
+                cancel = true;
+            }
         }
         if (TextUtils.isEmpty(nid_str)) {
             nid.setError(getString(R.string.error_field_required));

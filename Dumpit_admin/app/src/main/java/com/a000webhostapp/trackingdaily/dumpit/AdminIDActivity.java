@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -42,6 +45,7 @@ public class AdminIDActivity extends AppCompatActivity {
     private String address;
     private String type;
     private String admin_str;
+    private boolean profile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +65,7 @@ public class AdminIDActivity extends AppCompatActivity {
 
 
         Intent recievedIntent= getIntent();
+        profile=recievedIntent.getBooleanExtra("profile",false);
         name = recievedIntent.getStringExtra("name");
         type="admin";
         address = recievedIntent.getStringExtra("address");
@@ -68,7 +73,8 @@ public class AdminIDActivity extends AppCompatActivity {
         phone = recievedIntent.getStringExtra("mobile");
         ward = recievedIntent.getStringExtra("ward");
         email = recievedIntent.getStringExtra("email");
-        password = recievedIntent.getStringExtra("password");
+        if(!profile)
+            password = recievedIntent.getStringExtra("password");
 
 
         //FirebaseAuth.getInstance().signOut();
@@ -76,10 +82,30 @@ public class AdminIDActivity extends AppCompatActivity {
        // mAuth=FirebaseAuth.getInstance();
 
 
-
+        verify.getBackground().setAlpha(100);
+        verify.setEnabled(false);
         next.getBackground().setAlpha(100);
         next.setEnabled(false);
 
+        verifyTxt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                verify.getBackground().setAlpha(100);
+                verify.setEnabled(false);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                verify.getBackground().setAlpha(255);
+                verify.setEnabled(true);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                verify.getBackground().setAlpha(255);
+                verify.setEnabled(true);
+            }
+        });
 
         verify.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,13 +193,15 @@ public class AdminIDActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(AdminIDActivity.this,AdminVerificationActivity.class);
                 intent.putExtra("email", email);
-                intent.putExtra("password", password);
+                if(!profile)
+                    intent.putExtra("password", password);
                 intent.putExtra("name", name);
                 intent.putExtra("mobile", phone);
                 intent.putExtra("ward", ward);
                 intent.putExtra("address", address);
                 intent.putExtra("nid", nid);
                 intent.putExtra("code", admin_str);
+                intent.putExtra("profile", profile);
 
                 startActivity(intent);
                 finish();
