@@ -20,8 +20,8 @@ android {
 
 dependencies {
 
-    compile 'com.google.maps.android:android-maps-utils:0.5+'
-    compile 'com.android.support:support-annotations:27.1.1'
+    implementation 'com.google.maps.android:android-maps-utils:0.5+'
+    implementation 'com.android.support:support-annotations:27.1.1'
     implementation 'com.firebaseui:firebase-ui-storage:2.0.1'
     implementation 'com.github.bumptech.glide:glide:3.8.0'
     //noinspection GradleCompatible
@@ -34,7 +34,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:16.0.0'
     implementation 'com.google.firebase:firebase-database:16.0.1'
 
-    compile 'com.lsjwzh:materialloadingprogressbar:0.5.8-RELEASE'
+    implementation 'com.lsjwzh:materialloadingprogressbar:0.5.8-RELEASE'
     //noinspection GradleCompatible
     implementation 'com.android.support:cardview-v7:26.1.0'
     implementation 'com.android.support:recyclerview-v7:26.1.0'
@@ -46,8 +46,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.shuhart.stepview:stepview:1.4.0'
-    compile 'com.github.jlmd:AnimatedCircleLoadingView:1.1.5@aar'
-    compile 'com.gao.jiefly:abilitychartlibrary:1.0.1'
+    implementation 'com.github.jlmd:AnimatedCircleLoadingView:1.1.5@aar'
+    implementation 'com.gao.jiefly:abilitychartlibrary:1.0.1'
 
 
 }

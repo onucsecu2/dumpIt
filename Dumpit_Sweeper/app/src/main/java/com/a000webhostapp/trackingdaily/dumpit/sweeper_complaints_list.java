@@ -118,6 +118,7 @@ public class sweeper_complaints_list extends Fragment {
                         if(area_code.equals(areacode_complaint)) {
                             if(complaint_status.equalsIgnoreCase("pending")) {
                                 complaintList1.add(complaint);
+                                adapter1.notifyDataSetChanged();
                             }
                         }
                     }

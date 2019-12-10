@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.widget.AutoCompleteTextView;
@@ -34,7 +36,7 @@ public class SweeperIDActivity extends AppCompatActivity {
     private FirebaseAuthSettings firebaseAuthSettings;
     private TextView vStatus;
     private CircleProgressBar circleProgressBar;
-    private  boolean bool;
+    private  boolean profile;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthlistener;
     private String phone;
@@ -66,6 +68,7 @@ public class SweeperIDActivity extends AppCompatActivity {
 
 
         Intent recievedIntent= getIntent();
+        profile=recievedIntent.getBooleanExtra("profile",false);
         name = recievedIntent.getStringExtra("name");
         type="sweeper";
         address = recievedIntent.getStringExtra("address");
@@ -73,18 +76,39 @@ public class SweeperIDActivity extends AppCompatActivity {
         phone = recievedIntent.getStringExtra("mobile");
         ward = recievedIntent.getStringExtra("ward");
         email = recievedIntent.getStringExtra("email");
-        password = recievedIntent.getStringExtra("password");
+        if(!profile)
+            password = recievedIntent.getStringExtra("password");
 
 
         //FirebaseAuth.getInstance().signOut();
-       // FirebaseDatabase.getInstance().setLogLevel(Logger.Level.DEBUG);
-       // mAuth=FirebaseAuth.getInstance();
+        // FirebaseDatabase.getInstance().setLogLevel(Logger.Level.DEBUG);
+        // mAuth=FirebaseAuth.getInstance();
 
 
-
+        verify.getBackground().setAlpha(100);
+        verify.setEnabled(false);
         next.getBackground().setAlpha(100);
         next.setEnabled(false);
 
+        verifyTxt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                verify.getBackground().setAlpha(100);
+                verify.setEnabled(false);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                verify.getBackground().setAlpha(255);
+                verify.setEnabled(true);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                verify.getBackground().setAlpha(255);
+                verify.setEnabled(true);
+            }
+        });
 
         verify.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,12 +145,11 @@ public class SweeperIDActivity extends AppCompatActivity {
 
                             }
                             else{
+                                areacode=sweeperCode.getAreacode();
+
                                 verify.getBackground().setAlpha(100);
                                 cancel.getBackground().setAlpha(100);
                                 next.getBackground().setAlpha(255);
-
-                                areacode=sweeperCode.getAreacode();
-
                                 verify.setEnabled(false);
                                 cancel.setEnabled(false);
                                 next.setEnabled(true);
@@ -134,7 +157,7 @@ public class SweeperIDActivity extends AppCompatActivity {
                                 vStatus.setText("Successful!!");
                                 //ToastMessage("false paice");
                             }
-                          //  ToastMessage(String.valueOf(bool));
+                            //  ToastMessage(String.valueOf(bool));
                         }
                         else{
                             verify.getBackground().setAlpha(100);
@@ -145,7 +168,7 @@ public class SweeperIDActivity extends AppCompatActivity {
                             next.setEnabled(false);
                             circleProgressBar.setVisibility(circleProgressBar.GONE);
                             vStatus.setText(R.string.descript_error_verification_6);
-                          //  ToastMessage("nai nai");
+                            //  ToastMessage("nai nai");
 
                         }
 
@@ -161,7 +184,7 @@ public class SweeperIDActivity extends AppCompatActivity {
                         next.setEnabled(false);
                         circleProgressBar.setVisibility(circleProgressBar.GONE);
                         vStatus.setText(R.string.descript_error_verification_6);
-                       // ToastMessage("something is not wrong");
+                        // ToastMessage("something is not wrong");
                     }
                 });
 
@@ -173,16 +196,18 @@ public class SweeperIDActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(SweeperIDActivity.this, SweeperVerificationActivity.class);
+                Intent intent = new Intent(SweeperIDActivity.this,SweeperVerificationActivity.class);
                 intent.putExtra("email", email);
-                intent.putExtra("password", password);
+                if(!profile)
+                    intent.putExtra("password", password);
                 intent.putExtra("name", name);
                 intent.putExtra("mobile", phone);
                 intent.putExtra("ward", ward);
                 intent.putExtra("address", address);
                 intent.putExtra("nid", nid);
-                intent.putExtra("areacode", areacode);
                 intent.putExtra("sweeper", sweeper_str);
+                intent.putExtra("profile", profile);
+                intent.putExtra("areacode", areacode);
 
                 startActivity(intent);
                 finish();

@@ -76,9 +76,9 @@ public class sweeper_complaints_response_list extends Fragment {
 
        // ToastMessage(String.valueOf(i));
         //ToastMessage(achoda.get(1));
+        adapter2 = new sweeper_complaints_list_recycleview(rootView.getContext(),complaintList2);
 
         myRef = FirebaseDatabase.getInstance().getReference("Complaints");
-
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -91,6 +91,7 @@ public class sweeper_complaints_response_list extends Fragment {
                          if(area_code.equals(areacode_complaint)) {
                            if(!status_complaint.equals("Pending")) {
                                complaintList2.add(complaint);
+                               adapter2.notifyDataSetChanged();
                            }
                         }
                     }
@@ -102,7 +103,7 @@ public class sweeper_complaints_response_list extends Fragment {
                 ToastMessage("complaints load error");
             }
         });
-        adapter2 = new sweeper_complaints_list_recycleview(rootView.getContext(),complaintList2);
+
         //adapter1.notifyDataSetChanged();
         mRecyclerView.setAdapter(adapter2);
 
