@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.a000webhostapp.trackingdaily.dumpit">
+    package="com.a000webhostapp.trackingdaily.dumpit_admin">
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
@@ -26,7 +26,7 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.a000webhostapp.trackingdaily.dumpit_admin.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,18 +34,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name="com.a000webhostapp.trackingdaily.dumpit_admin.LoginActivity"
             android:label="@string/title_activity_login" />
         <activity
-            android:name=".AdminHomeActivity"
+            android:name="com.a000webhostapp.trackingdaily.dumpit_admin.AdminHomeActivity"
             android:label="Admin"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".AdminRegActivity"
+            android:name="com.a000webhostapp.trackingdaily.dumpit_admin.AdminRegActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".AdminVerificationActivity" />
-        <activity android:name=".AdminIDActivity" />
-        <activity android:name=".AdminAreaGPS" />
+        <activity android:name="com.a000webhostapp.trackingdaily.dumpit_admin.AdminVerificationActivity" />
+        <activity android:name="com.a000webhostapp.trackingdaily.dumpit_admin.AdminIDActivity" />
+        <activity android:name="com.a000webhostapp.trackingdaily.dumpit_admin.AdminAreaGPS" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -58,13 +58,13 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".AdminAddMapsActivity" />
-        <activity android:name=".AdminAreaRegisterActivity" />
-        <activity android:name=".AdminAreaUpdateActivity" />
-        <activity android:name=".AdminAreaUpdateDetailsActivity" />
-        <activity android:name=".AddAdminSweeperConfirmationActivity" />
-        <activity android:name=".MapStateActivity" />
-        <activity android:name=".CompStatActivity" />
+        <activity android:name="com.a000webhostapp.trackingdaily.dumpit_admin.AdminAddMapsActivity" />
+        <activity android:name="com.a000webhostapp.trackingdaily.dumpit_admin.AdminAreaRegisterActivity" />
+        <activity android:name="com.a000webhostapp.trackingdaily.dumpit_admin.AdminAreaUpdateActivity" />
+        <activity android:name="com.a000webhostapp.trackingdaily.dumpit_admin.AdminAreaUpdateDetailsActivity" />
+        <activity android:name="com.a000webhostapp.trackingdaily.dumpit_admin.AddAdminSweeperConfirmationActivity" />
+        <activity android:name="com.a000webhostapp.trackingdaily.dumpit_admin.MapStateActivity" />
+        <activity android:name="com.a000webhostapp.trackingdaily.dumpit_admin.CompStatActivity" />
     </application>
 
 </manifest>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.a000webhostapp.trackingdaily.dumpit">
+    package="com.a000webhostapp.trackingdaily.dumpit_sweeper">
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
@@ -26,7 +26,7 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.a000webhostapp.trackingdaily.dumpit_sweeper.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,17 +34,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name="com.a000webhostapp.trackingdaily.dumpit_sweeper.LoginActivity"
             android:label="@string/title_activity_login" />
         <activity
-            android:name=".SweeperHomeActivity"
+            android:name="com.a000webhostapp.trackingdaily.dumpit_sweeper.SweeperHomeActivity"
             android:label="sweeper"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".SweeperRegActivity"
+            android:name="com.a000webhostapp.trackingdaily.dumpit_sweeper.SweeperRegActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".SweeperVerificationActivity" />
-        <activity android:name=".SweeperIDActivity" />
+        <activity android:name="com.a000webhostapp.trackingdaily.dumpit_sweeper.SweeperVerificationActivity" />
+        <activity android:name="com.a000webhostapp.trackingdaily.dumpit_sweeper.SweeperIDActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -57,9 +57,9 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".MapsSweeperActivity" />
-        <activity android:name=".ResponseSweeper" />
-        <activity android:name=".SweeperCameraActivity" />
+        <activity android:name="com.a000webhostapp.trackingdaily.dumpit_sweeper.MapsSweeperActivity" />
+        <activity android:name="com.a000webhostapp.trackingdaily.dumpit_sweeper.ResponseSweeper" />
+        <activity android:name="com.a000webhostapp.trackingdaily.dumpit_sweeper.SweeperCameraActivity" />
     </application>
 
 </manifest>

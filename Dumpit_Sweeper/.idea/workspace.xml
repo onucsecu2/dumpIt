@@ -10,84 +10,62 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="53096ca0-e069-4567-b6a3-f1dcf0f163d9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-v24/logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Dumpit_Informer/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/../Dumpit_Informer/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Dumpit_Informer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Dumpit_Informer/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/google-services.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/google-services.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/a000webhostapp/trackingdaily/dumpit/ExampleInstrumentedTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/a000webhostapp/trackingdaily/dumpit_sweeper/ExampleInstrumentedTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/AddAdminSweeperConfirmationActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/Admin.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/AdminAddMapsActivity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/AdminAreaGPS.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/AdminAreaRegisterActivity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/AdminAreaUpdateActivity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/AdminAreaUpdateDetailsActivity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/AdminCode.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/AdminHomeActivity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/AdminIDActivity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/AdminRegActivity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/AdminVerificationActivity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/CameraActivity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/CompStatActivity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/ConfirmationActivity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/InformerHomeActivity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/InformerRegActivity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/InformerVerificationActivity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/LoginActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/MapStateActivity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/MapsActivity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/SweeperIDActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/SweeperIDActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/SweeperRegActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/SweeperRegActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/SweeperVerificationActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/SweeperVerificationActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/admin_area_list.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/admin_area_recycleview.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/admin_complaints_response_list.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/admin_complaints_response_list_recycleview.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/admin_new_sweeper_admin.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/informer_complaints_list.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/informer_complaints_list_recycleview.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/informer_make_complaint.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/sweeper_complaints_list.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/sweeper_complaints_list.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/sweeper_complaints_response_list.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/sweeper_complaints_response_list.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_admin_sweeper_confirmation.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_admin_area_add.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_admin_home.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_admin_id_verify.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_admin_reg.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_admin_verification.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_camera.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_comp_stat.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_informer_home.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_informer_reg.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_informer_verification.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/AreaCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit_sweeper/AreaCode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/CHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit_sweeper/CHistory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/Complaint.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit_sweeper/Complaint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/GPSHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit_sweeper/GPSHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/Informer.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit_sweeper/Informer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit_sweeper/LoginActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit_sweeper/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/MapsSweeperActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit_sweeper/MapsSweeperActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/ResponseAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit_sweeper/ResponseAdmin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/ResponseSweeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit_sweeper/ResponseSweeper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/Sector.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit_sweeper/Sector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/Sweeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit_sweeper/Sweeper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/SweeperCameraActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit_sweeper/SweeperCameraActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/SweeperCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit_sweeper/SweeperCode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/SweeperHomeActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit_sweeper/SweeperHomeActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/SweeperIDActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit_sweeper/SweeperIDActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/SweeperRegActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit_sweeper/SweeperRegActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/SweeperVerificationActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit_sweeper/SweeperVerificationActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/sweeper_complaints_list.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit_sweeper/sweeper_complaints_list.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/sweeper_complaints_list_recycleview.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit_sweeper/sweeper_complaints_list_recycleview.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/sweeper_complaints_response_list.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit_sweeper/sweeper_complaints_response_list.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/sweeper_complaints_response_list_recycleview.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit_sweeper/sweeper_complaints_response_list_recycleview.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_confirmation.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_confirmation.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_map_state.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_map_state.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_maps.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_maps.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_maps_areagps.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_maps_areagps.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_maps_sweeper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_maps_sweeper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_response_sweeper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_response_sweeper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_sweeper_camera.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_sweeper_camera.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_sweeper_id_verify.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_sweeper_id_verify.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_sweeper_reg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_sweeper_reg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/admin_area_list.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/admin_complaints_card.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/admin_complaints_response_list.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/admin_new_sweeper_admin.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/app_bar_admin_home.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/app_bar_informer_home.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/complaints_card.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/complaints_card.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/content_informer_home.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/informer_complaints_list.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/informer_make_complaint.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/nav_header_informer_home.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/android-profile/profile-2019-12-08-20-49-12-501.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/android-profile/profile-2019-12-08-20-49-12-501.rawproto" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/android-profile/profile-2019-12-08-20-49-21-406.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/android-profile/profile-2019-12-08-20-49-21-406.rawproto" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/android-profile/profile-2019-12-09-19-16-52-812.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/android-profile/profile-2019-12-09-19-16-52-812.rawproto" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/android-profile/profile-2019-12-09-19-16-57-282.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/android-profile/profile-2019-12-09-19-16-57-282.rawproto" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/android-profile/profile-2019-12-09-19-17-16-205.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/android-profile/profile-2019-12-09-19-17-16-205.rawproto" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/android-profile/profile-2019-12-10-14-05-10-225.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/android-profile/profile-2019-12-10-14-05-10-225.rawproto" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/android-profile/profile-2019-12-10-14-05-13-683.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/android-profile/profile-2019-12-10-14-05-13-683.rawproto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_sweeper_verification.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_sweeper_verification.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/app_bar_sweeper_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/app_bar_sweeper_home.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/content_sweeper_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/content_sweeper_home.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/java/com/a000webhostapp/trackingdaily/dumpit/ExampleUnitTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/java/com/a000webhostapp/trackingdaily/dumpit_sweeper/ExampleUnitTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/android-profile/profile-2019-12-10-16-41-32-355.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/android-profile/profile-2019-12-10-16-41-32-355.rawproto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/android-profile/profile-2019-12-10-16-42-08-364.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/android-profile/profile-2019-12-10-16-42-08-364.rawproto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/android-profile/profile-2019-12-10-16-42-09-548.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/android-profile/profile-2019-12-10-16-42-09-548.rawproto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/android-profile/profile-2019-12-10-16-43-30-663.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/android-profile/profile-2019-12-10-16-43-30-663.rawproto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/android-profile/profile-2019-12-10-16-43-53-710.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/android-profile/profile-2019-12-10-16-43-53-710.rawproto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/android-profile/profile-2019-12-10-16-48-33-076.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/android-profile/profile-2019-12-10-16-48-33-076.rawproto" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -107,12 +85,33 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="Dumpit_Sweeper" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Dumpit_Sweeper" type="f1a62948:ProjectNode" />
+                <item name="Dumpit_Sweeper" type="2d1252cf:ModuleNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Dumpit_Sweeper" type="f1a62948:ProjectNode" />
+                <item name="Dumpit_Sweeper" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Dumpit_Sweeper" type="f1a62948:ProjectNode" />
+                <item name="Dumpit_Sweeper" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="android" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -143,6 +142,9 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/complaints_card.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/sweeper_complaints_response_list.java" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/app/google-services.json" />
       </list>
     </option>
   </component>
@@ -154,46 +156,54 @@
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="ProjectPane" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="AndroidView">
+      <pane id="AndroidView" />
+      <pane id="PackagesPane">
         <subPane>
           <expand>
             <path>
-              <item name="Dumpit_Sweeper" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-            </path>
-            <path>
-              <item name="Dumpit_Sweeper" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-            </path>
-            <path>
-              <item name="Dumpit_Sweeper" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="dumpit" type="cbb59c9e:AndroidPsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Dumpit_Sweeper" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-            </path>
-            <path>
-              <item name="Dumpit_Sweeper" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
+              <item name="Dumpit_Sweeper" type="58d84e3e:PackageViewProjectNode" />
+              <item name="app" type="616d4139:PackageViewModuleNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="ProjectPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Dumpit_Sweeper" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Dumpit_Sweeper" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="Dumpit_Sweeper" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Dumpit_Sweeper" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="Dumpit_Sweeper" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/Desktop/dumpIt/Dumpit_Sweeper" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+            <path>
+              <item name="Dumpit_Sweeper" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/Desktop/dumpIt/Dumpit_Sweeper" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -202,7 +212,7 @@
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="android.sdk.path" value="$USER_HOME$/Android/Sdk" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable-v24" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/drawable-v24" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Dumpit_Informer" />
     <property name="not.eligible.for.single.variant.sync" value="true" />
   </component>
   <component name="RecentsManager">
@@ -229,7 +239,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Android App.app">
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
       <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -290,6 +300,30 @@
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Dumpit_Sweeper [signingReport]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="signingReport" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.Dumpit_Sweeper [signingReport]" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -307,28 +341,28 @@
   <component name="ToolWindowManager">
     <frame x="1366" y="-1" width="1366" height="728" extended-state="6" />
     <layout>
-      <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.82964224" visible="true" weight="0.28927493" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info id="Resources Explorer" order="3" sideWeight="0.17035775" side_tool="true" visible="true" weight="0.28927493" />
-      <window_info id="Structure" order="4" sideWeight="0.14176245" side_tool="true" weight="0.20166163" />
-      <window_info id="Build Variants" order="5" side_tool="true" />
-      <window_info id="Image Layers" order="6" />
-      <window_info id="Designer" order="7" />
-      <window_info id="Capture Tool" order="8" />
-      <window_info anchor="bottom" id="Find" weight="0.32879046" />
-      <window_info anchor="bottom" id="Run" order="0" />
+      <window_info id="Captures" order="0" sideWeight="0.33049405" side_tool="true" visible="true" weight="0.28927493" />
+      <window_info id="Favorites" order="1" side_tool="true" />
+      <window_info id="Resources Explorer" order="2" sideWeight="0.17035775" side_tool="true" weight="0.28927493" />
+      <window_info id="Structure" order="3" sideWeight="0.14176245" side_tool="true" weight="0.20166163" />
+      <window_info id="Build Variants" order="4" side_tool="true" />
+      <window_info id="Image Layers" order="5" />
+      <window_info id="Designer" order="6" />
+      <window_info id="Capture Tool" order="7" />
+      <window_info content_ui="combo" id="Project" order="8" sideWeight="0.66950595" visible="true" weight="0.28927493" />
+      <window_info anchor="bottom" id="Run" order="0" weight="0.32879046" />
       <window_info anchor="bottom" id="Logcat" order="1" weight="0.4923339" />
       <window_info anchor="bottom" id="TODO" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.21635434" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.47529814" />
       <window_info anchor="bottom" id="Terminal" order="4" weight="0.32879046" />
       <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="6" />
-      <window_info anchor="bottom" id="Build" order="7" weight="0.35093698" />
+      <window_info anchor="bottom" id="Build" order="7" weight="0.36456558" />
       <window_info anchor="bottom" id="Android Profiler" order="8" weight="0.32879046" />
+      <window_info anchor="bottom" id="Find" order="9" weight="0.32879046" />
       <window_info anchor="right" id="Preview" order="0" weight="0.3542296" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
-      <window_info anchor="right" id="Gradle" order="2" weight="0.32930514" />
+      <window_info anchor="right" id="Gradle" order="2" visible="true" weight="0.10196374" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
       <window_info anchor="right" id="Device File Explorer" order="5" side_tool="true" weight="0.32930514" />
@@ -358,21 +392,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/MapStateActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-494">
-          <caret line="48" column="19" selection-start-line="48" selection-start-column="19" selection-end-line="48" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/Sweeper.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/MapStateActivity.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit_sweeper/Sweeper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="186">
           <caret line="22" column="149" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="149" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/SweeperCode.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit_sweeper/SweeperCode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="15" column="11" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
@@ -386,20 +414,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/MapsActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1305">
-          <caret line="135" column="62" selection-start-line="135" selection-start-column="62" selection-end-line="135" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/ConfirmationActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="117">
-          <caret line="96" column="69" selection-start-line="96" selection-start-column="69" selection-end-line="96" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/MapsActivity.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/ConfirmationActivity.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="172">
@@ -415,28 +431,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/SweeperRegActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit_sweeper/SweeperRegActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="279">
           <caret line="86" column="32" selection-start-line="86" selection-start-column="32" selection-end-line="86" selection-end-column="32" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/LoginActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit_sweeper/LoginActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-788">
           <caret line="163" selection-start-line="163" selection-end-line="163" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/SweeperIDActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit_sweeper/SweeperIDActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="207" column="40" selection-start-line="207" selection-start-column="40" selection-end-line="207" selection-end-column="40" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/SweeperVerificationActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit_sweeper/SweeperVerificationActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1938">
           <caret line="204" column="83" selection-start-line="204" selection-start-column="83" selection-end-line="204" selection-end-column="83" />
@@ -456,7 +472,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit_sweeper/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1011">
           <caret line="37" column="18" selection-start-line="37" selection-start-column="18" selection-end-line="37" selection-end-column="18" />
@@ -467,17 +483,73 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/sweeper_complaints_list.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit_sweeper/sweeper_complaints_list.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="29">
           <caret line="75" selection-start-line="75" selection-end-line="77" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit/sweeper_complaints_response_list.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit_sweeper/sweeper_complaints_response_list.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="71">
           <caret line="93" column="63" selection-start-line="93" selection-start-column="63" selection-end-line="93" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit_sweeper/GPSHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-121" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gradle.properties">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/proguard-rules.pro">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/local.properties">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/settings.gradle">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="70" selection-start-line="5" selection-start-column="70" selection-end-line="5" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="60" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-manifest" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/google-services.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="33" selection-start-line="4" selection-start-column="33" selection-end-line="4" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/a000webhostapp/trackingdaily/dumpit_sweeper/AreaCode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="10">
+          <caret line="5" column="29" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
         </state>
       </provider>
     </entry>

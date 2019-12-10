@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.a000webhostapp.trackingdaily.dumpit.SweeperCameraActivity">
+    tools:context="com.a000webhostapp.trackingdaily.dumpit_sweeper.SweeperCameraActivity">
     <ImageView
         android:id="@+id/image_capture_sw"
         android:layout_width="250dp"

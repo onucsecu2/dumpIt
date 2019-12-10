@@ -10,7 +10,7 @@
     android:padding="15dp"
     android:weightSum="20"
     android:background="@drawable/gradient_background"
-    tools:context="com.a000webhostapp.trackingdaily.dumpit.CameraActivity">
+    tools:context="com.a000webhostapp.trackingdaily.dumpit_admin.CameraActivity">
     <ImageView
         android:id="@+id/image_capture"
         android:layout_width="match_parent"

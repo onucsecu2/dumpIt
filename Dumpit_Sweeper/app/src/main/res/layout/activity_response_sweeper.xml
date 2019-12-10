@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_gravity="center"
-    tools:context="com.a000webhostapp.trackingdaily.dumpit.ResponseSweeper">
+    tools:context="com.a000webhostapp.trackingdaily.dumpit_sweeper.ResponseSweeper">
     <ImageView
         android:layout_gravity="center"
         android:id="@+id/after_rspns"

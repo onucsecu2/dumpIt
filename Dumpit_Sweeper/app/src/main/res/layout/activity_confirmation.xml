@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/background"
-    tools:context="com.a000webhostapp.trackingdaily.dumpit.ConfirmationActivity">
+    tools:context="com.a000webhostapp.trackingdaily.dumpit_sweeper.ConfirmationActivity">
     <com.github.jlmd.animatedcircleloadingview.AnimatedCircleLoadingView
         android:id="@+id/circle_loading_view"
         android:layout_width="match_parent"

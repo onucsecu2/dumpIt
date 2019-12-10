@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.a000webhostapp.trackingdaily.dumpit"
+        applicationId "com.a000webhostapp.trackingdaily.dumpit_sweeper"
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 1

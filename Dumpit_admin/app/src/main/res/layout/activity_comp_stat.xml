@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:gravity="top"
     android:padding="10dp"
-    tools:context="com.a000webhostapp.trackingdaily.dumpit.CompStatActivity">
+    tools:context="com.a000webhostapp.trackingdaily.dumpit_admin.CompStatActivity">
     <com.gao.jiefly.abilitychartlibrary.AbilityChatView
         android:id="@+id/ability"
         android:layout_height="300dp"
